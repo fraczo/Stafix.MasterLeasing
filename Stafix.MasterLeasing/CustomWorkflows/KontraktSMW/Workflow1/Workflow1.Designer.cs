@@ -242,7 +242,6 @@ namespace KontraktSMW.Workflow1
             this.setState_Weryfikacja = new Microsoft.SharePoint.WorkflowActions.SetState();
             this.faultHandlersActivity5 = new System.Workflow.ComponentModel.FaultHandlersActivity();
             this.Weryfikacja_Routing = new System.Workflow.Activities.IfElseActivity();
-            this.logToHistoryListActivity17 = new Microsoft.SharePoint.WorkflowActions.LogToHistoryListActivity();
             this.onWorkflowItemChanged13 = new Microsoft.SharePoint.WorkflowActions.OnWorkflowItemChanged();
             this.faultHandlersActivity3 = new System.Workflow.ComponentModel.FaultHandlersActivity();
             this.setStateActivity27 = new System.Workflow.Activities.SetStateActivity();
@@ -326,7 +325,6 @@ namespace KontraktSMW.Workflow1
             // 
             // StatusUmowa_Telefon
             // 
-            this.StatusUmowa_Telefon.Enabled = false;
             this.StatusUmowa_Telefon.Name = "StatusUmowa_Telefon";
             this.StatusUmowa_Telefon.ExecuteCode += new System.EventHandler(this.StatusUmowa_Telefon_ExecuteCode);
             // 
@@ -343,7 +341,6 @@ namespace KontraktSMW.Workflow1
             // 
             // StatusUmowa_Stracony
             // 
-            this.StatusUmowa_Stracony.Enabled = false;
             this.StatusUmowa_Stracony.Name = "StatusUmowa_Stracony";
             this.StatusUmowa_Stracony.ExecuteCode += new System.EventHandler(this.StatusUmowa_Stracony_ExecuteCode);
             // 
@@ -360,7 +357,6 @@ namespace KontraktSMW.Workflow1
             // 
             // StatusUmowa_Uruchomienie
             // 
-            this.StatusUmowa_Uruchomienie.Enabled = false;
             this.StatusUmowa_Uruchomienie.Name = "StatusUmowa_Uruchomienie";
             this.StatusUmowa_Uruchomienie.ExecuteCode += new System.EventHandler(this.StatusUmowa_Uruchomienie_ExecuteCode);
             // 
@@ -387,7 +383,6 @@ namespace KontraktSMW.Workflow1
             // 
             // StatusWniosek_Stracony
             // 
-            this.StatusWniosek_Stracony.Enabled = false;
             this.StatusWniosek_Stracony.Name = "StatusWniosek_Stracony";
             this.StatusWniosek_Stracony.ExecuteCode += new System.EventHandler(this.StatusWniosek_Stracony_ExecuteCode);
             // 
@@ -409,7 +404,6 @@ namespace KontraktSMW.Workflow1
             // 
             // StatusWniosek_Umowa
             // 
-            this.StatusWniosek_Umowa.Enabled = false;
             this.StatusWniosek_Umowa.Name = "StatusWniosek_Umowa";
             this.StatusWniosek_Umowa.ExecuteCode += new System.EventHandler(this.StatusWniosek_Umowa_ExecuteCode);
             // 
@@ -436,7 +430,6 @@ namespace KontraktSMW.Workflow1
             // 
             // StatusOferta_Telefon
             // 
-            this.StatusOferta_Telefon.Enabled = false;
             this.StatusOferta_Telefon.Name = "StatusOferta_Telefon";
             this.StatusOferta_Telefon.ExecuteCode += new System.EventHandler(this.StatusOferta_Telefon_ExecuteCode);
             // 
@@ -452,7 +445,6 @@ namespace KontraktSMW.Workflow1
             // 
             // StatusOferta_Stracony
             // 
-            this.StatusOferta_Stracony.Enabled = false;
             this.StatusOferta_Stracony.Name = "StatusOferta_Stracony";
             this.StatusOferta_Stracony.ExecuteCode += new System.EventHandler(this.StatusOferta_Stracony_ExecuteCode);
             // 
@@ -469,7 +461,6 @@ namespace KontraktSMW.Workflow1
             // 
             // StatusOferta_Wniosek
             // 
-            this.StatusOferta_Wniosek.Enabled = false;
             this.StatusOferta_Wniosek.Name = "StatusOferta_Wniosek";
             this.StatusOferta_Wniosek.ExecuteCode += new System.EventHandler(this.StatusOferta_Wniosek_ExecuteCode);
             // 
@@ -492,8 +483,8 @@ namespace KontraktSMW.Workflow1
             // 
             // StatusTelefon_Stracony
             // 
-            this.StatusTelefon_Stracony.Enabled = false;
             this.StatusTelefon_Stracony.Name = "StatusTelefon_Stracony";
+            this.StatusTelefon_Stracony.ExecuteCode += new System.EventHandler(this.StatusTelefon_Stracony_ExecuteCode);
             // 
             // setStateActivity9
             // 
@@ -502,8 +493,8 @@ namespace KontraktSMW.Workflow1
             // 
             // StatusTelefon_Oferta
             // 
-            this.StatusTelefon_Oferta.Enabled = false;
             this.StatusTelefon_Oferta.Name = "StatusTelefon_Oferta";
+            this.StatusTelefon_Oferta.ExecuteCode += new System.EventHandler(this.StatusTelefon_Oferta_ExecuteCode);
             // 
             // logERROR_WefyfikacjaInit
             // 
@@ -532,8 +523,8 @@ namespace KontraktSMW.Workflow1
             // 
             // StatusRozmowa_Stracony
             // 
-            this.StatusRozmowa_Stracony.Enabled = false;
             this.StatusRozmowa_Stracony.Name = "StatusRozmowa_Stracony";
+            this.StatusRozmowa_Stracony.ExecuteCode += new System.EventHandler(this.StatusRozmowa_Stracony_ExecuteCode);
             // 
             // setStateActivity4
             // 
@@ -542,8 +533,8 @@ namespace KontraktSMW.Workflow1
             // 
             // StatusRozmowa_Telefon
             // 
-            this.StatusRozmowa_Telefon.Enabled = false;
             this.StatusRozmowa_Telefon.Name = "StatusRozmowa_Telefon";
+            this.StatusRozmowa_Telefon.ExecuteCode += new System.EventHandler(this.StatusRozmowa_Telefon_ExecuteCode);
             // 
             // setStateActivity3
             // 
@@ -552,8 +543,8 @@ namespace KontraktSMW.Workflow1
             // 
             // StatusRozmowa_Oferta
             // 
-            this.StatusRozmowa_Oferta.Enabled = false;
             this.StatusRozmowa_Oferta.Name = "StatusRozmowa_Oferta";
+            this.StatusRozmowa_Oferta.ExecuteCode += new System.EventHandler(this.StatusRozmowa_Oferta_ExecuteCode);
             // 
             // logERROR_NavigatorInit
             // 
@@ -816,7 +807,6 @@ namespace KontraktSMW.Workflow1
             this.StatusLeadu_Uruchomiony.Activities.Add(this.Navigator_Uruchomienie);
             codecondition24.Condition += new System.EventHandler<System.Workflow.Activities.ConditionalEventArgs>(this.IsStatusLeadu_Uruchomiony);
             this.StatusLeadu_Uruchomiony.Condition = codecondition24;
-            this.StatusLeadu_Uruchomiony.Enabled = false;
             this.StatusLeadu_Uruchomiony.Name = "StatusLeadu_Uruchomiony";
             // 
             // StatusLeadu_Umowa
@@ -824,7 +814,6 @@ namespace KontraktSMW.Workflow1
             this.StatusLeadu_Umowa.Activities.Add(this.Navigator_Umowa);
             codecondition25.Condition += new System.EventHandler<System.Workflow.Activities.ConditionalEventArgs>(this.IsStatusLeadu_Umowa);
             this.StatusLeadu_Umowa.Condition = codecondition25;
-            this.StatusLeadu_Umowa.Enabled = false;
             this.StatusLeadu_Umowa.Name = "StatusLeadu_Umowa";
             // 
             // StatusLeadu_Wniosek
@@ -832,7 +821,6 @@ namespace KontraktSMW.Workflow1
             this.StatusLeadu_Wniosek.Activities.Add(this.Navigator_Wniosek);
             codecondition26.Condition += new System.EventHandler<System.Workflow.Activities.ConditionalEventArgs>(this.IsStatusLeadu_Wniosek);
             this.StatusLeadu_Wniosek.Condition = codecondition26;
-            this.StatusLeadu_Wniosek.Enabled = false;
             this.StatusLeadu_Wniosek.Name = "StatusLeadu_Wniosek";
             // 
             // StatusLeadu_Oferta
@@ -1390,16 +1378,6 @@ namespace KontraktSMW.Workflow1
             this.Weryfikacja_Routing.Activities.Add(this.faultHandlersActivity6);
             this.Weryfikacja_Routing.Name = "Weryfikacja_Routing";
             // 
-            // logToHistoryListActivity17
-            // 
-            this.logToHistoryListActivity17.Duration = System.TimeSpan.Parse("-10675199.02:48:05.4775808");
-            this.logToHistoryListActivity17.EventId = Microsoft.SharePoint.Workflow.SPWorkflowHistoryEventType.WorkflowComment;
-            this.logToHistoryListActivity17.HistoryDescription = "TTTTTT";
-            this.logToHistoryListActivity17.HistoryOutcome = "";
-            this.logToHistoryListActivity17.Name = "logToHistoryListActivity17";
-            this.logToHistoryListActivity17.OtherData = "";
-            this.logToHistoryListActivity17.UserId = -1;
-            // 
             // onWorkflowItemChanged13
             // 
             this.onWorkflowItemChanged13.AfterProperties = null;
@@ -1649,7 +1627,6 @@ namespace KontraktSMW.Workflow1
             // Weryfikacja_OnChange
             // 
             this.Weryfikacja_OnChange.Activities.Add(this.onWorkflowItemChanged13);
-            this.Weryfikacja_OnChange.Activities.Add(this.logToHistoryListActivity17);
             this.Weryfikacja_OnChange.Activities.Add(this.Weryfikacja_Routing);
             this.Weryfikacja_OnChange.Activities.Add(this.faultHandlersActivity5);
             this.Weryfikacja_OnChange.Name = "Weryfikacja_OnChange";
@@ -2176,8 +2153,6 @@ namespace KontraktSMW.Workflow1
 
         private IfElseActivity Weryfikacja_Routing;
 
-        private Microsoft.SharePoint.WorkflowActions.LogToHistoryListActivity logToHistoryListActivity17;
-
         private Microsoft.SharePoint.WorkflowActions.OnWorkflowItemChanged onWorkflowItemChanged13;
 
         private FaultHandlersActivity faultHandlersActivity3;
@@ -2225,6 +2200,11 @@ namespace KontraktSMW.Workflow1
         private StateActivity Navigator;
 
         private StateActivity Start;
+
+
+
+
+
 
 
 

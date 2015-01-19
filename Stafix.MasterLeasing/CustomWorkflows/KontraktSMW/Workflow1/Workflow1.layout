@@ -1,4 +1,4 @@
-﻿<StateMachineWorkflowDesigner xmlns:ns0="clr-namespace:System.Drawing;Assembly=System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" Size="1119; 1932" AutoSizeMargin="16; 24" AutoSize="False" Location="30; 30" Name="Workflow1" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/workflow">
+﻿<StateMachineWorkflowDesigner xmlns:ns0="clr-namespace:System.Drawing;Assembly=System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" Size="1119; 1932" AutoSizeMargin="16; 24" Location="30; 30" Name="Workflow1" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/workflow">
 	<StateMachineWorkflowDesigner.DesignerConnectors>
 		<StateDesignerConnector TargetActivity="Navigator" TargetConnectionEdge="Top" SetStateName="setStateActivity1" SourceActivity="Start" TargetConnectionIndex="0" SourceStateName="Start" SourceConnectionEdge="Right" EventHandlerName="eventDrivenActivity1" SourceConnectionIndex="0" TargetStateName="Navigator">
 			<StateDesignerConnector.Segments>
@@ -359,28 +359,27 @@
 		</StateDesigner>
 		<StateDesigner Size="188; 100" AutoSizeMargin="16; 24" Location="46; 1633" Name="Weryfikacja">
 			<StateDesigner.Designers>
-				<EventDrivenDesigner Name="Weryfikacja_OnChange" Size="554; 522" Location="54; 1692">
+				<EventDrivenDesigner Name="Weryfikacja_OnChange" Size="554; 459" Location="54; 1692">
 					<EventDrivenDesigner.Designers>
 						<HandleExternalEventActivityDesigner Name="onWorkflowItemChanged13" Size="130; 44" Location="266; 1757" />
-						<ActivityDesigner Name="logToHistoryListActivity17" Size="130; 44" Location="266; 1820" />
-						<IfElseDesigner Name="Weryfikacja_Routing" Size="534; 312" Location="64; 1883">
+						<IfElseDesigner Name="Weryfikacja_Routing" Size="534; 312" Location="64; 1820">
 							<IfElseDesigner.Designers>
-								<IfElseBranchDesigner Name="Weryfikacja_Oferta" Size="150; 209" Location="83; 1957">
+								<IfElseBranchDesigner Name="Weryfikacja_Oferta" Size="150; 209" Location="83; 1894">
 									<IfElseBranchDesigner.Designers>
-										<CodeDesigner Name="StatusRozmowa_Oferta" Size="130; 44" Location="93; 2022" />
-										<SetStateDesigner Name="setStateActivity3" Size="130; 62" Location="93; 2085" />
+										<CodeDesigner Name="StatusRozmowa_Oferta" Size="130; 44" Location="93; 1959" />
+										<SetStateDesigner Name="setStateActivity3" Size="130; 62" Location="93; 2022" />
 									</IfElseBranchDesigner.Designers>
 								</IfElseBranchDesigner>
-								<IfElseBranchDesigner Name="Weryfikacja_Telemarketing" Size="150; 209" Location="256; 1957">
+								<IfElseBranchDesigner Name="Weryfikacja_Telemarketing" Size="150; 209" Location="256; 1894">
 									<IfElseBranchDesigner.Designers>
-										<CodeDesigner Name="StatusRozmowa_Telefon" Size="130; 44" Location="266; 2022" />
-										<SetStateDesigner Name="setStateActivity4" Size="130; 62" Location="266; 2085" />
+										<CodeDesigner Name="StatusRozmowa_Telefon" Size="130; 44" Location="266; 1959" />
+										<SetStateDesigner Name="setStateActivity4" Size="130; 62" Location="266; 2022" />
 									</IfElseBranchDesigner.Designers>
 								</IfElseBranchDesigner>
-								<IfElseBranchDesigner Name="Weryfikacja_Odrzucenie" Size="150; 209" Location="429; 1957">
+								<IfElseBranchDesigner Name="Weryfikacja_Odrzucenie" Size="150; 209" Location="429; 1894">
 									<IfElseBranchDesigner.Designers>
-										<CodeDesigner Name="StatusRozmowa_Stracony" Size="130; 44" Location="439; 2022" />
-										<SetStateDesigner Name="setStateActivity2" Size="130; 62" Location="439; 2085" />
+										<CodeDesigner Name="StatusRozmowa_Stracony" Size="130; 44" Location="439; 1959" />
+										<SetStateDesigner Name="setStateActivity2" Size="130; 62" Location="439; 2022" />
 									</IfElseBranchDesigner.Designers>
 								</IfElseBranchDesigner>
 								<FaultHandlersActivityDesigner Name="faultHandlersActivity6" Size="130; 41" Location="0; 0" ShowPreview="False" />
@@ -474,13 +473,13 @@
 		</StateDesigner>
 		<StateDesigner Size="188; 80" AutoSizeMargin="16; 24" AutoSize="False" Location="46; 1305" Name="Odrzucenie">
 			<StateDesigner.Designers>
-				<StateInitializationDesigner Name="stateInitializationActivity2" Size="150; 398" Location="514; 154">
+				<StateInitializationDesigner Name="stateInitializationActivity2" Size="150; 398" Location="54; 1338">
 					<StateInitializationDesigner.Designers>
-						<CallExternalMethodActivityDesigner Name="setState_Odrzucony" Size="130; 44" Location="524; 219" />
-						<ActivityDesigner Name="logToHistoryListActivity2" Size="130; 44" Location="524; 282" />
-						<CodeDesigner Name="Komunikat_Odrzucony" Size="130; 44" Location="524; 345" />
-						<CodeDesigner Name="SetCT_Odrzucony" Size="130; 44" Location="524; 408" />
-						<SetStateDesigner Name="setStateActivity26" Size="130; 62" Location="524; 471" />
+						<CallExternalMethodActivityDesigner Name="setState_Odrzucony" Size="130; 44" Location="64; 1403" />
+						<ActivityDesigner Name="logToHistoryListActivity2" Size="130; 44" Location="64; 1466" />
+						<CodeDesigner Name="Komunikat_Odrzucony" Size="130; 44" Location="64; 1529" />
+						<CodeDesigner Name="SetCT_Odrzucony" Size="130; 44" Location="64; 1592" />
+						<SetStateDesigner Name="setStateActivity26" Size="130; 62" Location="64; 1655" />
 					</StateInitializationDesigner.Designers>
 				</StateInitializationDesigner>
 			</StateDesigner.Designers>

@@ -36,7 +36,7 @@ namespace KontraktSMW.Workflow1
 
         public SPWorkflowActivationProperties workflowProperties = new SPWorkflowActivationProperties();
 
-        //public String logRozliczenie_DodajDoRozliczen = default(System.String);
+        public String logRozliczenie_DodajDoRozliczen = default(System.String);
         //public Komunikat message = new Komunikat();
 
         #region Warunki logiczne Navigatora
@@ -339,55 +339,48 @@ namespace KontraktSMW.Workflow1
 
 
 
-        #region Procedury
-
-        /// <summary>
-        /// tworzy wiadomość z informacją dla agenta o ile agent ma włączoną subskrybcję w kartotece
-        /// </summary>
-        /// <param name="?"></param>
+        #region Obsługa raportowania zmian statusu
 
         private void StatusChangeUpdate(string statusSTART, string statusEND)
         {
-            //int kontraktID = workflowProperties.ItemId;
-            //const string _tabKontraktyAktywnosci_ = "tabKontrakty_Aktywnosci";
+            int kontraktID = workflowProperties.ItemId;
+            const string _tabKontraktyAktywnosci_ = "tabKontrakty_Aktywnosci";
 
-            //using (SPSite site = new SPSite(workflowProperties.SiteId))
-            //{
-            //    //using (SPWeb web = site.OpenWeb())
-            //    using (SPWeb web = site.AllWebs[workflowProperties.WebId])
-            //    {
-            //        System.Text.StringBuilder sb = new System.Text.StringBuilder(@"<Where><And><Eq><FieldRef Name='colLinkDoKontraktu'/><Value Type='Text'>{__kontraktID__}</Value></Eq><Eq><FieldRef Name='colData'/><Value Type='DateTime'><Today/></Value></Eq></And></Where>");
-            //        sb.Replace("{__kontraktID__}", kontraktID.ToString());
-            //        string camlQuery = sb.ToString();
+            using (SPSite site = new SPSite(workflowProperties.SiteId))
+            {
+                //using (SPWeb web = site.OpenWeb())
+                using (SPWeb web = site.AllWebs[workflowProperties.WebId])
+                {
+                    System.Text.StringBuilder sb = new System.Text.StringBuilder(@"<Where><And><Eq><FieldRef Name='colLinkDoKontraktu'/><Value Type='Text'>{__kontraktID__}</Value></Eq><Eq><FieldRef Name='colData'/><Value Type='DateTime'><Today/></Value></Eq></And></Where>");
+                    sb.Replace("{__kontraktID__}", kontraktID.ToString());
+                    string camlQuery = sb.ToString();
 
-            //        SPList list = web.Lists[_tabKontraktyAktywnosci_];
-            //        SPQuery query = new SPQuery();
-            //        //query.ViewFields = @"";
-            //        query.Query = camlQuery;
+                    SPList list = web.Lists[_tabKontraktyAktywnosci_];
+                    SPQuery query = new SPQuery();
+                    //query.ViewFields = @"";
+                    query.Query = camlQuery;
 
-            //        SPListItemCollection items = list.GetItems(query);
-            //        if (items.Count == 1)
-            //        {
-            //            SPListItem item = items[0];
-            //            //item["colStatusPoczatkowy"] = statusSTART;
-            //            item["colStatusKoncowy"] = statusEND;
-            //            item.Update();
-            //        }
-            //        else
-            //        {
-            //            //dodaj nowy rekord
-            //            SPListItem item = list.AddItem();
-            //            item["colLinkDoKontraktu"] = kontraktID;
-            //            item["colData"] = DateTime.Now;
-            //            item["colStatusPoczatkowy"] = statusSTART;
-            //            item["colStatusKoncowy"] = statusEND;
-            //            item.Update();
+                    SPListItemCollection items = list.GetItems(query);
+                    if (items.Count == 1)
+                    {
+                        SPListItem item = items[0];
+                        //item["colStatusPoczatkowy"] = statusSTART;
+                        item["colStatusKoncowy"] = statusEND;
+                        item.Update();
+                    }
+                    else
+                    {
+                        //dodaj nowy rekord
+                        SPListItem item = list.AddItem();
+                        item["colLinkDoKontraktu"] = kontraktID;
+                        item["colData"] = DateTime.Now;
+                        item["colStatusPoczatkowy"] = statusSTART;
+                        item["colStatusKoncowy"] = statusEND;
+                        item.Update();
 
-            //        }
-            //    }
-            //}
-
-
+                    }
+                }
+            }
         }
 
         private void StatusLead_Rozmowa_ExecuteCode(object sender, EventArgs e)
@@ -460,56 +453,60 @@ namespace KontraktSMW.Workflow1
             StatusChangeUpdate(_UMOWA_, _TELEFON_);
         }
 
+        #endregion
+
+        #region Obsługa zasilania tablicy z rozliczeniami prowizji
+
         private void nRozliczenie_DodajDoRozliczen_ExecuteCode(object sender, EventArgs e)
         {
-            //int kontraktID = workflowProperties.ItemId;
+            int kontraktID = workflowProperties.ItemId;
 
-            //using (SPSite site = new SPSite(workflowProperties.SiteId))
-            //{
-            //    //using (SPWeb web = site.OpenWeb())
-            //    using (SPWeb web = site.AllWebs[workflowProperties.WebId])
-            //    {
-            //        System.Text.StringBuilder sb = new System.Text.StringBuilder(@"<Where><Eq><FieldRef Name='colLinkDoKontraktu'/><Value Type='Text'>{__kontraktID__}</Value></Eq></Where>");
-            //        sb.Replace("{__kontraktID__}", kontraktID.ToString());
-            //        string camlQuery = sb.ToString();
+            using (SPSite site = new SPSite(workflowProperties.SiteId))
+            {
+                //using (SPWeb web = site.OpenWeb())
+                using (SPWeb web = site.AllWebs[workflowProperties.WebId])
+                {
+                    System.Text.StringBuilder sb = new System.Text.StringBuilder(@"<Where><Eq><FieldRef Name='colLinkDoKontraktu'/><Value Type='Text'>{__kontraktID__}</Value></Eq></Where>");
+                    sb.Replace("{__kontraktID__}", kontraktID.ToString());
+                    string camlQuery = sb.ToString();
 
-            //        SPList list = web.Lists["tabRozliczeniaKontraktow"];
-            //        SPQuery query = new SPQuery();
-            //        //query.ViewFields = @"";
-            //        query.Query = camlQuery;
+                    SPList list = web.Lists["tabRozliczeniaKontraktow"];
+                    SPQuery query = new SPQuery();
+                    //query.ViewFields = @"";
+                    query.Query = camlQuery;
 
-            //        SPListItemCollection items = list.GetItems(query);
-            //        if (items.Count == 0)
-            //        {
-            //            try
-            //            {
-            //                //dodaj nowy rekord
-            //                SPListItem item = list.AddItem();
-            //                item["colLinkDoKontraktu"] = kontraktID;
-            //                item["colWartoscKontraktuPLN"] = workflowProperties.Item["colWartoscKontraktuPLN"];
-            //                item["colProwizja"] = workflowProperties.Item["colProwizja"];
-            //                item["colNumerUmowy_Kontrakt"] = workflowProperties.Item["colNumerUmowy_Kontrakt"];
-            //                item["colDataUruchomienia_Kontrakt"] = workflowProperties.Item["colDataUruchomienia_Kontrakt"];
-            //                item["colDataZakonczenia_Kontrakt"] = workflowProperties.Item["colDataZakonczenia_Kontrakt"];
-            //                item["colUstalenia"] = workflowProperties.Item["colUstalenia"];
-            //                item.Update();
+                    SPListItemCollection items = list.GetItems(query);
+                    if (items.Count == 0)
+                    {
+                        try
+                        {
+                            //dodaj nowy rekord
+                            SPListItem item = list.AddItem();
+                            item["colLinkDoKontraktu"] = kontraktID;
+                            item["colWartoscKontraktuPLN"] = workflowProperties.Item["colWartoscKontraktuPLN"];
+                            item["colProwizja"] = workflowProperties.Item["colProwizja"];
+                            item["colNumerUmowy_Kontrakt"] = workflowProperties.Item["colNumerUmowy_Kontrakt"];
+                            item["colDataUruchomienia_Kontrakt"] = workflowProperties.Item["colDataUruchomienia_Kontrakt"];
+                            item["colDataZakonczenia_Kontrakt"] = workflowProperties.Item["colDataZakonczenia_Kontrakt"];
+                            item["colUstalenia"] = workflowProperties.Item["colUstalenia"];
+                            item.Update();
 
-            //                logRozliczenie_DodajDoRozliczen = "Dodano nowy rekord w kartotece rozliczeń prowizji";
-            //            }
-            //            catch (Exception exp)
-            //            {
-            //                throw;
-            //            }
+                            logRozliczenie_DodajDoRozliczen = "Dodano nowy rekord w kartotece rozliczeń prowizji";
+                        }
+                        catch (Exception exp)
+                        {
+                            throw;
+                        }
 
 
-            //        }
-            //        else
-            //        {
-            //            logRozliczenie_DodajDoRozliczen = "Nie dodano nowego rekordu - rekord już istnieje w kartotece rozliczeń prowizji";
-            //        }
+                    }
+                    else
+                    {
+                        logRozliczenie_DodajDoRozliczen = "Nie dodano nowego rekordu - rekord już istnieje w kartotece rozliczeń prowizji";
+                    }
 
-            //    }
-            //}
+                }
+            }
         }
 
         #endregion
