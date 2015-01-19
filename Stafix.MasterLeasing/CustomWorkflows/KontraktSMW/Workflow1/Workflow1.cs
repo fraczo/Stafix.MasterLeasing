@@ -247,7 +247,7 @@ namespace KontraktSMW.Workflow1
 
         private void SetCT_Telemarketing_ExecuteCode(object sender, EventArgs e)
         {
-            AdjustFormSettings("ctKontrakt.Telemarketing", "Rozmowa", "cmdKontrakt_Telemarketing", true);
+            AdjustFormSettings("ctKontrakt.Telemarketing", "Telefon", "cmdKontrakt_Telemarketing", true);
         }
 
         private void SetCT_Oferta_ExecuteCode(object sender, EventArgs e)
@@ -306,20 +306,15 @@ namespace KontraktSMW.Workflow1
 
         private void AdjustFormSettings(string strContentType, string strStatusLeadu, string strCommandColumnName, bool clearPowodOdrzucenia)
         {
-            if (workflowProperties.Item["ContentType"] != null)
-            {
-                workflowProperties.Item["ContentType"] = strContentType;
-            }
 
-            if (workflowProperties.Item["colStatusLeadu"] != null)
-            {
-                workflowProperties.Item["colStatusLeadu"] = strStatusLeadu;
-            }
+            workflowProperties.Item["ContentType"] = strContentType;
 
-            if (workflowProperties.Item["colPowodOdrzucenia"] != null &&
-                clearPowodOdrzucenia == true)
+            workflowProperties.Item["colStatusLeadu"] = strStatusLeadu;
+
+
+            if (clearPowodOdrzucenia == true)
             {
-                workflowProperties.Item["colPowodOdrzucenia"] = string.Empty; ;
+                workflowProperties.Item["colPowodOdrzucenia"] = string.Empty;
             }
 
             if (!string.IsNullOrEmpty(strCommandColumnName))
@@ -336,7 +331,6 @@ namespace KontraktSMW.Workflow1
         }
 
         #endregion
-
 
 
         #region Obsługa raportowania zmian statusu
@@ -782,6 +776,11 @@ namespace KontraktSMW.Workflow1
         }
 
         #endregion
+
+        private void IsStatus_Lead_Else(object sender, ConditionalEventArgs e)
+        {
+            e.Result = true;
+        }
 
     }
 }

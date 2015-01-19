@@ -54,6 +54,7 @@ namespace KontraktSMW.Workflow1
             System.Workflow.Activities.CodeCondition codecondition26 = new System.Workflow.Activities.CodeCondition();
             System.Workflow.Activities.CodeCondition codecondition27 = new System.Workflow.Activities.CodeCondition();
             System.Workflow.Activities.CodeCondition codecondition28 = new System.Workflow.Activities.CodeCondition();
+            System.Workflow.Activities.CodeCondition codecondition29 = new System.Workflow.Activities.CodeCondition();
             System.Workflow.ComponentModel.ActivityBind activitybind1 = new System.Workflow.ComponentModel.ActivityBind();
             System.Workflow.Runtime.CorrelationToken correlationtoken1 = new System.Workflow.Runtime.CorrelationToken();
             System.Workflow.Runtime.CorrelationToken correlationtoken2 = new System.Workflow.Runtime.CorrelationToken();
@@ -129,6 +130,7 @@ namespace KontraktSMW.Workflow1
             this.setStateActivity3 = new System.Workflow.Activities.SetStateActivity();
             this.StatusRozmowa_Oferta = new System.Workflow.Activities.CodeActivity();
             this.logERROR_NavigatorInit = new Microsoft.SharePoint.WorkflowActions.LogToHistoryListActivity();
+            this.setStateActivity27 = new System.Workflow.Activities.SetStateActivity();
             this.Navigator_Stracony = new System.Workflow.Activities.SetStateActivity();
             this.Navigator_Uruchomienie = new System.Workflow.Activities.SetStateActivity();
             this.Navigator_Umowa = new System.Workflow.Activities.SetStateActivity();
@@ -162,6 +164,7 @@ namespace KontraktSMW.Workflow1
             this.Weryfikacja_Telemarketing = new System.Workflow.Activities.IfElseBranchActivity();
             this.Weryfikacja_Oferta = new System.Workflow.Activities.IfElseBranchActivity();
             this.faultHandlerActivity3 = new System.Workflow.ComponentModel.FaultHandlerActivity();
+            this.Status_Lead_Else = new System.Workflow.Activities.IfElseBranchActivity();
             this.faultHandlersActivity7 = new System.Workflow.ComponentModel.FaultHandlersActivity();
             this.StatusLeadu_Stracony = new System.Workflow.Activities.IfElseBranchActivity();
             this.StatusLeadu_Uruchomiony = new System.Workflow.Activities.IfElseBranchActivity();
@@ -244,7 +247,6 @@ namespace KontraktSMW.Workflow1
             this.Weryfikacja_Routing = new System.Workflow.Activities.IfElseActivity();
             this.onWorkflowItemChanged13 = new Microsoft.SharePoint.WorkflowActions.OnWorkflowItemChanged();
             this.faultHandlersActivity3 = new System.Workflow.ComponentModel.FaultHandlersActivity();
-            this.setStateActivity27 = new System.Workflow.Activities.SetStateActivity();
             this.Navigator_Routing = new System.Workflow.Activities.IfElseActivity();
             this.logRouter = new Microsoft.SharePoint.WorkflowActions.LogToHistoryListActivity();
             this.faultHandlersActivity1 = new System.Workflow.ComponentModel.FaultHandlersActivity();
@@ -556,6 +558,11 @@ namespace KontraktSMW.Workflow1
             this.logERROR_NavigatorInit.OtherData = "";
             this.logERROR_NavigatorInit.UserId = -1;
             // 
+            // setStateActivity27
+            // 
+            this.setStateActivity27.Name = "setStateActivity27";
+            this.setStateActivity27.TargetStateName = "Weryfikacja";
+            // 
             // Navigator_Stracony
             // 
             this.Navigator_Stracony.Name = "Navigator_Stracony";
@@ -791,6 +798,13 @@ namespace KontraktSMW.Workflow1
             this.faultHandlerActivity3.FaultType = typeof(System.SystemException);
             this.faultHandlerActivity3.Name = "faultHandlerActivity3";
             // 
+            // Status_Lead_Else
+            // 
+            this.Status_Lead_Else.Activities.Add(this.setStateActivity27);
+            codecondition23.Condition += new System.EventHandler<System.Workflow.Activities.ConditionalEventArgs>(this.IsStatus_Lead_Else);
+            this.Status_Lead_Else.Condition = codecondition23;
+            this.Status_Lead_Else.Name = "Status_Lead_Else";
+            // 
             // faultHandlersActivity7
             // 
             this.faultHandlersActivity7.Name = "faultHandlersActivity7";
@@ -798,43 +812,43 @@ namespace KontraktSMW.Workflow1
             // StatusLeadu_Stracony
             // 
             this.StatusLeadu_Stracony.Activities.Add(this.Navigator_Stracony);
-            codecondition23.Condition += new System.EventHandler<System.Workflow.Activities.ConditionalEventArgs>(this.IsStatusLeadu_Stracony);
-            this.StatusLeadu_Stracony.Condition = codecondition23;
+            codecondition24.Condition += new System.EventHandler<System.Workflow.Activities.ConditionalEventArgs>(this.IsStatusLeadu_Stracony);
+            this.StatusLeadu_Stracony.Condition = codecondition24;
             this.StatusLeadu_Stracony.Name = "StatusLeadu_Stracony";
             // 
             // StatusLeadu_Uruchomiony
             // 
             this.StatusLeadu_Uruchomiony.Activities.Add(this.Navigator_Uruchomienie);
-            codecondition24.Condition += new System.EventHandler<System.Workflow.Activities.ConditionalEventArgs>(this.IsStatusLeadu_Uruchomiony);
-            this.StatusLeadu_Uruchomiony.Condition = codecondition24;
+            codecondition25.Condition += new System.EventHandler<System.Workflow.Activities.ConditionalEventArgs>(this.IsStatusLeadu_Uruchomiony);
+            this.StatusLeadu_Uruchomiony.Condition = codecondition25;
             this.StatusLeadu_Uruchomiony.Name = "StatusLeadu_Uruchomiony";
             // 
             // StatusLeadu_Umowa
             // 
             this.StatusLeadu_Umowa.Activities.Add(this.Navigator_Umowa);
-            codecondition25.Condition += new System.EventHandler<System.Workflow.Activities.ConditionalEventArgs>(this.IsStatusLeadu_Umowa);
-            this.StatusLeadu_Umowa.Condition = codecondition25;
+            codecondition26.Condition += new System.EventHandler<System.Workflow.Activities.ConditionalEventArgs>(this.IsStatusLeadu_Umowa);
+            this.StatusLeadu_Umowa.Condition = codecondition26;
             this.StatusLeadu_Umowa.Name = "StatusLeadu_Umowa";
             // 
             // StatusLeadu_Wniosek
             // 
             this.StatusLeadu_Wniosek.Activities.Add(this.Navigator_Wniosek);
-            codecondition26.Condition += new System.EventHandler<System.Workflow.Activities.ConditionalEventArgs>(this.IsStatusLeadu_Wniosek);
-            this.StatusLeadu_Wniosek.Condition = codecondition26;
+            codecondition27.Condition += new System.EventHandler<System.Workflow.Activities.ConditionalEventArgs>(this.IsStatusLeadu_Wniosek);
+            this.StatusLeadu_Wniosek.Condition = codecondition27;
             this.StatusLeadu_Wniosek.Name = "StatusLeadu_Wniosek";
             // 
             // StatusLeadu_Oferta
             // 
             this.StatusLeadu_Oferta.Activities.Add(this.Navigator_Oferta);
-            codecondition27.Condition += new System.EventHandler<System.Workflow.Activities.ConditionalEventArgs>(this.IsStatusLeadu_Oferta);
-            this.StatusLeadu_Oferta.Condition = codecondition27;
+            codecondition28.Condition += new System.EventHandler<System.Workflow.Activities.ConditionalEventArgs>(this.IsStatusLeadu_Oferta);
+            this.StatusLeadu_Oferta.Condition = codecondition28;
             this.StatusLeadu_Oferta.Name = "StatusLeadu_Oferta";
             // 
             // StatusLeadu_Telefon
             // 
             this.StatusLeadu_Telefon.Activities.Add(this.Navigator_Telemarketing);
-            codecondition28.Condition += new System.EventHandler<System.Workflow.Activities.ConditionalEventArgs>(this.IsStatusLeadu_Telefon);
-            this.StatusLeadu_Telefon.Condition = codecondition28;
+            codecondition29.Condition += new System.EventHandler<System.Workflow.Activities.ConditionalEventArgs>(this.IsStatusLeadu_Telefon);
+            this.StatusLeadu_Telefon.Condition = codecondition29;
             this.StatusLeadu_Telefon.Name = "StatusLeadu_Telefon";
             // 
             // faultHandlersActivity2
@@ -1392,11 +1406,6 @@ namespace KontraktSMW.Workflow1
             this.faultHandlersActivity3.Activities.Add(this.faultHandlerActivity3);
             this.faultHandlersActivity3.Name = "faultHandlersActivity3";
             // 
-            // setStateActivity27
-            // 
-            this.setStateActivity27.Name = "setStateActivity27";
-            this.setStateActivity27.TargetStateName = "Weryfikacja";
-            // 
             // Navigator_Routing
             // 
             this.Navigator_Routing.Activities.Add(this.StatusLeadu_Telefon);
@@ -1406,6 +1415,7 @@ namespace KontraktSMW.Workflow1
             this.Navigator_Routing.Activities.Add(this.StatusLeadu_Uruchomiony);
             this.Navigator_Routing.Activities.Add(this.StatusLeadu_Stracony);
             this.Navigator_Routing.Activities.Add(this.faultHandlersActivity7);
+            this.Navigator_Routing.Activities.Add(this.Status_Lead_Else);
             this.Navigator_Routing.Name = "Navigator_Routing";
             // 
             // logRouter
@@ -1635,7 +1645,6 @@ namespace KontraktSMW.Workflow1
             // 
             this.stateInitializationActivity15.Activities.Add(this.logRouter);
             this.stateInitializationActivity15.Activities.Add(this.Navigator_Routing);
-            this.stateInitializationActivity15.Activities.Add(this.setStateActivity27);
             this.stateInitializationActivity15.Activities.Add(this.faultHandlersActivity3);
             this.stateInitializationActivity15.Name = "stateInitializationActivity15";
             // 
@@ -1772,6 +1781,8 @@ namespace KontraktSMW.Workflow1
         }
 
         #endregion
+
+        private IfElseBranchActivity Status_Lead_Else;
 
         private SetStateActivity setStateActivity8;
 
@@ -2200,6 +2211,8 @@ namespace KontraktSMW.Workflow1
         private StateActivity Navigator;
 
         private StateActivity Start;
+
+
 
 
 

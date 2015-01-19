@@ -1,4 +1,4 @@
-﻿<StateMachineWorkflowDesigner xmlns:ns0="clr-namespace:System.Drawing;Assembly=System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" Size="1119; 1932" AutoSizeMargin="16; 24" Location="30; 30" Name="Workflow1" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/workflow">
+﻿<StateMachineWorkflowDesigner xmlns:ns0="clr-namespace:System.Drawing;Assembly=System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" Size="1119; 1932" AutoSizeMargin="16; 24" AutoSize="False" Location="30; 30" Name="Workflow1" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/workflow">
 	<StateMachineWorkflowDesigner.DesignerConnectors>
 		<StateDesignerConnector TargetActivity="Navigator" TargetConnectionEdge="Top" SetStateName="setStateActivity1" SourceActivity="Start" TargetConnectionIndex="0" SourceStateName="Start" SourceConnectionEdge="Right" EventHandlerName="eventDrivenActivity1" SourceConnectionIndex="0" TargetStateName="Navigator">
 			<StateDesignerConnector.Segments>
@@ -7,15 +7,6 @@
 				<ns0:Point X="250" Y="1738" />
 				<ns0:Point X="143" Y="1738" />
 				<ns0:Point X="143" Y="1749" />
-			</StateDesignerConnector.Segments>
-		</StateDesignerConnector>
-		<StateDesignerConnector TargetActivity="Weryfikacja" TargetConnectionEdge="Top" SetStateName="setStateActivity27" SourceActivity="Navigator" TargetConnectionIndex="0" SourceStateName="Navigator" SourceConnectionEdge="Right" EventHandlerName="stateInitializationActivity15" SourceConnectionIndex="0" TargetStateName="Weryfikacja">
-			<StateDesignerConnector.Segments>
-				<ns0:Point X="236" Y="1793" />
-				<ns0:Point X="252" Y="1793" />
-				<ns0:Point X="252" Y="1626" />
-				<ns0:Point X="140" Y="1626" />
-				<ns0:Point X="140" Y="1633" />
 			</StateDesignerConnector.Segments>
 		</StateDesignerConnector>
 		<StateDesignerConnector TargetActivity="Telemarketing" TargetConnectionEdge="Top" SetStateName="Navigator_Telemarketing" SourceActivity="Navigator" TargetConnectionIndex="0" SourceStateName="Navigator" SourceConnectionEdge="Right" EventHandlerName="stateInitializationActivity15" SourceConnectionIndex="0" TargetStateName="Telemarketing">
@@ -70,6 +61,15 @@
 				<ns0:Point X="252" Y="1298" />
 				<ns0:Point X="140" Y="1298" />
 				<ns0:Point X="140" Y="1305" />
+			</StateDesignerConnector.Segments>
+		</StateDesignerConnector>
+		<StateDesignerConnector TargetActivity="Weryfikacja" TargetConnectionEdge="Top" SetStateName="setStateActivity27" SourceActivity="Navigator" TargetConnectionIndex="0" SourceStateName="Navigator" SourceConnectionEdge="Right" EventHandlerName="stateInitializationActivity15" SourceConnectionIndex="0" TargetStateName="Weryfikacja">
+			<StateDesignerConnector.Segments>
+				<ns0:Point X="236" Y="1793" />
+				<ns0:Point X="252" Y="1793" />
+				<ns0:Point X="252" Y="1626" />
+				<ns0:Point X="140" Y="1626" />
+				<ns0:Point X="140" Y="1633" />
 			</StateDesignerConnector.Segments>
 		</StateDesignerConnector>
 		<StateDesignerConnector TargetActivity="Oferta" TargetConnectionEdge="Top" SetStateName="setStateActivity3" SourceActivity="Weryfikacja" TargetConnectionIndex="0" SourceStateName="Weryfikacja" SourceConnectionEdge="Right" EventHandlerName="Weryfikacja_OnChange" SourceConnectionIndex="1" TargetStateName="Oferta">
@@ -303,47 +303,51 @@
 				</EventDrivenDesigner>
 			</StateDesigner.Designers>
 		</StateDesigner>
-		<StateDesigner Size="194; 80" AutoSizeMargin="16; 24" Location="46; 1749" Name="Navigator">
+		<StateDesigner Size="194; 80" AutoSizeMargin="16; 24" AutoSize="False" Location="46; 1749" Name="Navigator">
 			<StateDesigner.Designers>
-				<StateInitializationDesigner Name="stateInitializationActivity15" Size="1073; 474" Location="54; 1782">
+				<StateInitializationDesigner Name="stateInitializationActivity15" Size="1246; 393" Location="62; 154">
 					<StateInitializationDesigner.Designers>
-						<ActivityDesigner Name="logRouter" Size="130; 41" Location="525; 1847" />
-						<IfElseDesigner Name="Navigator_Routing" Size="1053; 249" Location="64; 1907">
+						<ActivityDesigner Name="logRouter" Size="130; 41" Location="620; 219" />
+						<IfElseDesigner Name="Navigator_Routing" Size="1226; 249" Location="72; 279">
 							<IfElseDesigner.Designers>
-								<IfElseBranchDesigner Name="StatusLeadu_Telefon" Size="150; 146" Location="83; 1981">
+								<IfElseBranchDesigner Name="StatusLeadu_Telefon" Size="150; 146" Location="91; 353">
 									<IfElseBranchDesigner.Designers>
-										<SetStateDesigner Name="Navigator_Telemarketing" Size="130; 62" Location="93; 2046" />
+										<SetStateDesigner Name="Navigator_Telemarketing" Size="130; 62" Location="101; 418" />
 									</IfElseBranchDesigner.Designers>
 								</IfElseBranchDesigner>
-								<IfElseBranchDesigner Name="StatusLeadu_Oferta" Size="150; 146" Location="256; 1981">
+								<IfElseBranchDesigner Name="StatusLeadu_Oferta" Size="150; 146" Location="264; 353">
 									<IfElseBranchDesigner.Designers>
-										<SetStateDesigner Name="Navigator_Oferta" Size="130; 62" Location="266; 2046" />
+										<SetStateDesigner Name="Navigator_Oferta" Size="130; 62" Location="274; 418" />
 									</IfElseBranchDesigner.Designers>
 								</IfElseBranchDesigner>
-								<IfElseBranchDesigner Name="StatusLeadu_Wniosek" Size="150; 146" Location="429; 1981">
+								<IfElseBranchDesigner Name="StatusLeadu_Wniosek" Size="150; 146" Location="437; 353">
 									<IfElseBranchDesigner.Designers>
-										<SetStateDesigner Name="Navigator_Wniosek" Size="130; 62" Location="439; 2046" />
+										<SetStateDesigner Name="Navigator_Wniosek" Size="130; 62" Location="447; 418" />
 									</IfElseBranchDesigner.Designers>
 								</IfElseBranchDesigner>
-								<IfElseBranchDesigner Name="StatusLeadu_Umowa" Size="150; 146" Location="602; 1981">
+								<IfElseBranchDesigner Name="StatusLeadu_Umowa" Size="150; 146" Location="610; 353">
 									<IfElseBranchDesigner.Designers>
-										<SetStateDesigner Name="Navigator_Umowa" Size="130; 62" Location="612; 2046" />
+										<SetStateDesigner Name="Navigator_Umowa" Size="130; 62" Location="620; 418" />
 									</IfElseBranchDesigner.Designers>
 								</IfElseBranchDesigner>
-								<IfElseBranchDesigner Name="StatusLeadu_Uruchomiony" Size="150; 146" Location="775; 1981">
+								<IfElseBranchDesigner Name="StatusLeadu_Uruchomiony" Size="150; 146" Location="783; 353">
 									<IfElseBranchDesigner.Designers>
-										<SetStateDesigner Name="Navigator_Uruchomienie" Size="130; 62" Location="785; 2046" />
+										<SetStateDesigner Name="Navigator_Uruchomienie" Size="130; 62" Location="793; 418" />
 									</IfElseBranchDesigner.Designers>
 								</IfElseBranchDesigner>
-								<IfElseBranchDesigner Name="StatusLeadu_Stracony" Size="150; 146" Location="948; 1981">
+								<IfElseBranchDesigner Name="StatusLeadu_Stracony" Size="150; 146" Location="956; 353">
 									<IfElseBranchDesigner.Designers>
-										<SetStateDesigner Name="Navigator_Stracony" Size="130; 62" Location="958; 2046" />
+										<SetStateDesigner Name="Navigator_Stracony" Size="130; 62" Location="966; 418" />
 									</IfElseBranchDesigner.Designers>
 								</IfElseBranchDesigner>
 								<FaultHandlersActivityDesigner Name="faultHandlersActivity7" Size="130; 41" Location="0; 0" ShowPreview="False" />
+								<IfElseBranchDesigner Name="Status_Lead_Else" Size="150; 146" Location="1129; 353">
+									<IfElseBranchDesigner.Designers>
+										<SetStateDesigner Name="setStateActivity27" Size="130; 62" Location="1139; 418" />
+									</IfElseBranchDesigner.Designers>
+								</IfElseBranchDesigner>
 							</IfElseDesigner.Designers>
 						</IfElseDesigner>
-						<SetStateDesigner Name="setStateActivity27" Size="130; 62" Location="525; 2175" />
 						<FaultHandlersActivityDesigner Name="faultHandlersActivity3" Size="130; 41" Location="0; 0" ShowPreview="False">
 							<FaultHandlersActivityDesigner.Designers>
 								<FaultHandlerActivityDesigner Name="faultHandlerActivity3" Size="130; 41" Location="0; 0">
