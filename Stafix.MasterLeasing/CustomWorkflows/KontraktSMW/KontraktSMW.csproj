@@ -55,6 +55,7 @@
     <Reference Include="System.Workflow.Runtime" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Komunikat.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Workflow1\Workflow1.cs">
       <SubType>Component</SubType>

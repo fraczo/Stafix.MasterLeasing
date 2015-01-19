@@ -14,17 +14,30 @@ using System.Workflow.Activities.Rules;
 using Microsoft.SharePoint;
 using Microsoft.SharePoint.Workflow;
 using Microsoft.SharePoint.WorkflowActions;
+using System.Text;
 
 namespace KontraktSMW.Workflow1
 {
     public sealed partial class Workflow1 : StateMachineWorkflowActivity
     {
+        const string _LEAD_ = "Lead";
+        const string _ROZMOWA_ = "Rozmowa";
+        const string _OFERTA_ = "Oferta";
+        const string _WNIOSEK_ = "Wniosek";
+        const string _UMOWA_ = "Umowa";
+        const string _TELEFON_ = "Telefon";
+        const string _STRACONY_ = "Stracony";
+        const string _URUCHOMIONY_ = "Uruchomiony";
+
         public Workflow1()
         {
             InitializeComponent();
         }
 
         public SPWorkflowActivationProperties workflowProperties = new SPWorkflowActivationProperties();
+
+        //public String logRozliczenie_DodajDoRozliczen = default(System.String);
+        //public Komunikat message = new Komunikat();
 
         #region Warunki logiczne Navigatora
 
@@ -224,5 +237,554 @@ namespace KontraktSMW.Workflow1
         }
 
         #endregion
+
+        #region Ustawianie CT
+
+        private void SetCT_Weryfikacja_ExecuteCode(object sender, EventArgs e)
+        {
+            AdjustFormSettings("ctKontrakt.Weryfikacja", "Rozmowa", "cmdKontrakt_Weryfikacja", true);
+        }
+
+        private void SetCT_Telemarketing_ExecuteCode(object sender, EventArgs e)
+        {
+            AdjustFormSettings("ctKontrakt.Telemarketing", "Rozmowa", "cmdKontrakt_Telemarketing", true);
+        }
+
+        private void SetCT_Oferta_ExecuteCode(object sender, EventArgs e)
+        {
+            AdjustFormSettings("ctKontrakt.Oferta", "Oferta", "cmdKontrakt_Oferta", true);
+        }
+
+        private void SetCT_AkceptacjaOferty_ExecuteCode(object sender, EventArgs e)
+        {
+            AdjustFormSettings("ctKontrakt.AkceptacjaOferty", "Oferta", "cmdKontrakt_AkceptacjaOferty", true);
+        }
+
+        private void SetCT_Wniosek_ExecuteCode(object sender, EventArgs e)
+        {
+            AdjustFormSettings("ctKontrakt.Wniosek", "Wniosek", "cmdKontrakt_Wniosek", true);
+        }
+
+        private void SetCT_AkceptacjaWniosku_ExecuteCode(object sender, EventArgs e)
+        {
+            AdjustFormSettings("ctKontrakt.AkceptacjaWniosku", "Wniosek", "cmdKontrakt_AkceptacjaWniosku", true);
+        }
+
+        private void SetCT_Umowa_ExecuteCode(object sender, EventArgs e)
+        {
+            AdjustFormSettings("ctKontrakt.Umowa", "Umowa", "cmdKontrakt_Umowa", true);
+        }
+
+        private void SetCT_AkceptacjaUmowy_ExecuteCode(object sender, EventArgs e)
+        {
+            AdjustFormSettings("ctKontrakt.AkceptacjaUmowy", "Umowa", "cmdKontrakt_AkceptacjaUmowy", true);
+        }
+
+        private void SetCT_Uruchomienie_ExecuteCode(object sender, EventArgs e)
+        {
+            AdjustFormSettings("ctKontrakt.Uruchomienie", "Uruchomienie", "cmdKontrakt_Uruchomienie", false);
+        }
+
+        private void SetCT_Dokumentacja_ExecuteCode(object sender, EventArgs e)
+        {
+            AdjustFormSettings("ctKontrakt.Dokumentacja", "Uruchomienie", "cmdKontrakt_Dokumentacja", false);
+        }
+
+        private void SetCT_Rozliczenie_ExecuteCode(object sender, EventArgs e)
+        {
+            AdjustFormSettings("ctKontrakt.Rozliczenie", "Rozliczenie", string.Empty, false);
+        }
+
+        private void SetCT_Odrzucony_ExecuteCode(object sender, EventArgs e)
+        {
+            AdjustFormSettings("ctKontrakt.Odrzucenie", "Stracony", string.Empty, false);
+        }
+
+        #endregion
+
+        #region CT - Helpers
+
+        private void AdjustFormSettings(string strContentType, string strStatusLeadu, string strCommandColumnName, bool clearPowodOdrzucenia)
+        {
+            if (workflowProperties.Item["ContentType"] != null)
+            {
+                workflowProperties.Item["ContentType"] = strContentType;
+            }
+
+            if (workflowProperties.Item["colStatusLeadu"] != null)
+            {
+                workflowProperties.Item["colStatusLeadu"] = strStatusLeadu;
+            }
+
+            if (workflowProperties.Item["colPowodOdrzucenia"] != null &&
+                clearPowodOdrzucenia == true)
+            {
+                workflowProperties.Item["colPowodOdrzucenia"] = string.Empty; ;
+            }
+
+            if (!string.IsNullOrEmpty(strCommandColumnName))
+            {
+                if (workflowProperties.Item[strCommandColumnName] != null)
+                {
+                    //wyczyść pole komendy
+                    workflowProperties.Item[strCommandColumnName] = string.Empty; ;
+                }
+            }
+
+
+            workflowProperties.Item.Update();
+        }
+
+        #endregion
+
+
+
+        #region Procedury
+
+        /// <summary>
+        /// tworzy wiadomość z informacją dla agenta o ile agent ma włączoną subskrybcję w kartotece
+        /// </summary>
+        /// <param name="?"></param>
+
+        private void StatusChangeUpdate(string statusSTART, string statusEND)
+        {
+            //int kontraktID = workflowProperties.ItemId;
+            //const string _tabKontraktyAktywnosci_ = "tabKontrakty_Aktywnosci";
+
+            //using (SPSite site = new SPSite(workflowProperties.SiteId))
+            //{
+            //    //using (SPWeb web = site.OpenWeb())
+            //    using (SPWeb web = site.AllWebs[workflowProperties.WebId])
+            //    {
+            //        System.Text.StringBuilder sb = new System.Text.StringBuilder(@"<Where><And><Eq><FieldRef Name='colLinkDoKontraktu'/><Value Type='Text'>{__kontraktID__}</Value></Eq><Eq><FieldRef Name='colData'/><Value Type='DateTime'><Today/></Value></Eq></And></Where>");
+            //        sb.Replace("{__kontraktID__}", kontraktID.ToString());
+            //        string camlQuery = sb.ToString();
+
+            //        SPList list = web.Lists[_tabKontraktyAktywnosci_];
+            //        SPQuery query = new SPQuery();
+            //        //query.ViewFields = @"";
+            //        query.Query = camlQuery;
+
+            //        SPListItemCollection items = list.GetItems(query);
+            //        if (items.Count == 1)
+            //        {
+            //            SPListItem item = items[0];
+            //            //item["colStatusPoczatkowy"] = statusSTART;
+            //            item["colStatusKoncowy"] = statusEND;
+            //            item.Update();
+            //        }
+            //        else
+            //        {
+            //            //dodaj nowy rekord
+            //            SPListItem item = list.AddItem();
+            //            item["colLinkDoKontraktu"] = kontraktID;
+            //            item["colData"] = DateTime.Now;
+            //            item["colStatusPoczatkowy"] = statusSTART;
+            //            item["colStatusKoncowy"] = statusEND;
+            //            item.Update();
+
+            //        }
+            //    }
+            //}
+
+
+        }
+
+        private void StatusLead_Rozmowa_ExecuteCode(object sender, EventArgs e)
+        {
+            StatusChangeUpdate(_LEAD_, _ROZMOWA_);
+        }
+
+        private void StatusRozmowa_Oferta_ExecuteCode(object sender, EventArgs e)
+        {
+            StatusChangeUpdate(_ROZMOWA_, _OFERTA_);
+        }
+
+        private void StatusRozmowa_Telefon_ExecuteCode(object sender, EventArgs e)
+        {
+            StatusChangeUpdate(_ROZMOWA_, _TELEFON_);
+        }
+
+        private void StatusRozmowa_Stracony_ExecuteCode(object sender, EventArgs e)
+        {
+            StatusChangeUpdate(_ROZMOWA_, _STRACONY_);
+        }
+
+        private void StatusTelefon_Oferta_ExecuteCode(object sender, EventArgs e)
+        {
+            StatusChangeUpdate(_TELEFON_, _OFERTA_);
+        }
+
+        private void StatusTelefon_Stracony_ExecuteCode(object sender, EventArgs e)
+        {
+            StatusChangeUpdate(_TELEFON_, _STRACONY_);
+        }
+
+        private void StatusOferta_Wniosek_ExecuteCode(object sender, EventArgs e)
+        {
+            StatusChangeUpdate(_OFERTA_, _WNIOSEK_);
+        }
+
+        private void StatusOferta_Stracony_ExecuteCode(object sender, EventArgs e)
+        {
+            StatusChangeUpdate(_OFERTA_, _STRACONY_);
+        }
+
+        private void StatusOferta_Telefon_ExecuteCode(object sender, EventArgs e)
+        {
+            StatusChangeUpdate(_OFERTA_, _TELEFON_);
+        }
+
+        private void StatusWniosek_Umowa_ExecuteCode(object sender, EventArgs e)
+        {
+            StatusChangeUpdate(_WNIOSEK_, _UMOWA_);
+        }
+
+        private void StatusWniosek_Stracony_ExecuteCode(object sender, EventArgs e)
+        {
+            StatusChangeUpdate(_WNIOSEK_, _STRACONY_);
+        }
+
+        private void StatusUmowa_Uruchomienie_ExecuteCode(object sender, EventArgs e)
+        {
+            StatusChangeUpdate(_UMOWA_, _URUCHOMIONY_);
+        }
+
+        private void StatusUmowa_Stracony_ExecuteCode(object sender, EventArgs e)
+        {
+            StatusChangeUpdate(_UMOWA_, _STRACONY_);
+        }
+
+        private void StatusUmowa_Telefon_ExecuteCode(object sender, EventArgs e)
+        {
+            StatusChangeUpdate(_UMOWA_, _TELEFON_);
+        }
+
+        private void nRozliczenie_DodajDoRozliczen_ExecuteCode(object sender, EventArgs e)
+        {
+            //int kontraktID = workflowProperties.ItemId;
+
+            //using (SPSite site = new SPSite(workflowProperties.SiteId))
+            //{
+            //    //using (SPWeb web = site.OpenWeb())
+            //    using (SPWeb web = site.AllWebs[workflowProperties.WebId])
+            //    {
+            //        System.Text.StringBuilder sb = new System.Text.StringBuilder(@"<Where><Eq><FieldRef Name='colLinkDoKontraktu'/><Value Type='Text'>{__kontraktID__}</Value></Eq></Where>");
+            //        sb.Replace("{__kontraktID__}", kontraktID.ToString());
+            //        string camlQuery = sb.ToString();
+
+            //        SPList list = web.Lists["tabRozliczeniaKontraktow"];
+            //        SPQuery query = new SPQuery();
+            //        //query.ViewFields = @"";
+            //        query.Query = camlQuery;
+
+            //        SPListItemCollection items = list.GetItems(query);
+            //        if (items.Count == 0)
+            //        {
+            //            try
+            //            {
+            //                //dodaj nowy rekord
+            //                SPListItem item = list.AddItem();
+            //                item["colLinkDoKontraktu"] = kontraktID;
+            //                item["colWartoscKontraktuPLN"] = workflowProperties.Item["colWartoscKontraktuPLN"];
+            //                item["colProwizja"] = workflowProperties.Item["colProwizja"];
+            //                item["colNumerUmowy_Kontrakt"] = workflowProperties.Item["colNumerUmowy_Kontrakt"];
+            //                item["colDataUruchomienia_Kontrakt"] = workflowProperties.Item["colDataUruchomienia_Kontrakt"];
+            //                item["colDataZakonczenia_Kontrakt"] = workflowProperties.Item["colDataZakonczenia_Kontrakt"];
+            //                item["colUstalenia"] = workflowProperties.Item["colUstalenia"];
+            //                item.Update();
+
+            //                logRozliczenie_DodajDoRozliczen = "Dodano nowy rekord w kartotece rozliczeń prowizji";
+            //            }
+            //            catch (Exception exp)
+            //            {
+            //                throw;
+            //            }
+
+
+            //        }
+            //        else
+            //        {
+            //            logRozliczenie_DodajDoRozliczen = "Nie dodano nowego rekordu - rekord już istnieje w kartotece rozliczeń prowizji";
+            //        }
+
+            //    }
+            //}
+        }
+
+        #endregion
+
+        #region Komunikaty
+
+        private void Komunikat_Odrzucony_ExecuteCode(object sender, EventArgs e)
+        {
+
+            //try
+            //{
+            //    if (IsKomunikatUpdated())
+            //    {
+            //        string strSubject = string.Format("Klient:{0} {1} :: stracony",
+            //                message.Klient.ToString(),
+            //                message.DataZgloszenia.ToShortDateString());
+
+            //        StringBuilder sb = new StringBuilder();
+            //        sb.AppendFormat("<h2>Szczegóły kontraktu:<h2>");
+            //        sb.AppendFormat("<ul>");
+            //        sb.AppendFormat("<li>{0}:{1}</li>", "Klient", message.Klient.ToString());
+            //        sb.AppendFormat("<li>{0}:{1}</li>", "Data Zgłoszenia", message.DataZgloszenia.ToShortDateString());
+            //        sb.AppendFormat("<li>{0}:{1}</li>", "Wartość PLN", message.WartoscPLN.ToString());
+            //        sb.AppendFormat("<li>{0}:{1}</li>", "Cel Finansowania", message.CelFinansowania.ToString());
+            //        sb.AppendFormat("<li>{0}:{1}</li>", "Ustalenia", message.Ustalenia.ToString());
+            //        sb.AppendFormat("<li>{0}:{1}</li>", "Status", message.StatusLeadu.ToString());
+            //        sb.AppendFormat("</ul>");
+
+            //        string strBody = sb.ToString();
+
+            //        KomunikatDlaAgenta(strSubject, strBody);
+            //    }
+
+            //}
+            //catch (Exception exp)
+            //{
+            //    throw;
+            //}
+
+        }
+
+        private void Komunikat_AkceptacjaOferty_ExecuteCode(object sender, EventArgs e)
+        {
+            //KomunikatDlaAgenta(
+            //    string.Format("Kontrakt #{0}: oferta zaakceptowana przez Klienta", workflowProperties.ItemId.ToString()), "");
+        }
+
+        private void Komunikat_AkceptacjaWniosku_ExecuteCode(object sender, EventArgs e)
+        {
+            //KomunikatDlaAgenta(
+            //    string.Format("Kontrakt #{0}: wniosek zaakceptowany przez Bank", workflowProperties.ItemId.ToString()), "");
+        }
+
+        private void Komunikat_WniosekOdrzucony_ExecuteCode(object sender, EventArgs e)
+        {
+            //KomunikatDlaAgenta(
+            //    string.Format("Kontrakt #{0}: wniosek odrzucony przez Bank", workflowProperties.ItemId.ToString()), "");
+
+        }
+
+        private void Komunikat_OfertaNiezaakceptowana_ExecuteCode(object sender, EventArgs e)
+        {
+            //KomunikatDlaAgenta(
+            //    string.Format("Kontrakt #{0}: oferta odrzucona przez Klienta", workflowProperties.ItemId.ToString()), "");
+
+        }
+
+        private void Komunikat_UmowaUruchomiona_ExecuteCode(object sender, EventArgs e)
+        {
+            //KomunikatDlaAgenta(
+            //    string.Format("Kontrakt #{0}: umowa uruchomiona", workflowProperties.ItemId.ToString()), "");
+
+        }
+
+        private void Komunikat_UmowaStracona_ExecuteCode(object sender, EventArgs e)
+        {
+            //KomunikatDlaAgenta(
+            //     string.Format("Kontrakt #{0}: umowa stracona", workflowProperties.ItemId.ToString()), "");
+
+        }
+
+        private void Komunikat_UmowaNiezaakceptowana_ExecuteCode(object sender, EventArgs e)
+        {
+            //KomunikatDlaAgenta(
+            //     string.Format("Kontrakt #{0}: umowa niezaakceptowana przez Klienta", workflowProperties.ItemId.ToString()), "Klient przekazany do Telemarketingu");
+
+        }
+
+        #endregion
+
+        #region Komunikaty.Procedury
+
+        private bool IsKomunikatUpdated()
+        {
+            return false;
+
+            //try
+            //{
+            //    if (workflowProperties.Item["colDataZgloszenia"] != null)
+            //    {
+            //        message.DataZgloszenia = Convert.ToDateTime(workflowProperties.Item["colDataZgloszenia"]);
+            //    }
+
+            //    if (workflowProperties.Item["colKlient"] != null)
+            //    {
+            //        message.Klient = workflowProperties.Item["colKlient"].ToString();
+            //    }
+            //    else
+            //    {
+            //        message.Klient = string.Empty;
+            //    }
+
+            //    if (workflowProperties.Item["colWartoscPLN"] != null)
+            //    {
+            //        SPFieldCurrency price = (SPFieldCurrency)workflowProperties.Item["colWartoscPLN"];
+
+            //        message.WartoscPLN = price.GetFieldValueAsText(workflowProperties.Item["colWartoscPLN"]);
+            //    }
+            //    else
+            //    {
+            //        message.WartoscPLN = String.Empty;
+            //    }
+
+            //    if (workflowProperties.Item["colCelFinansowania"] != null)
+            //    {
+            //        message.CelFinansowania = (string)workflowProperties.Item["colCelFinansowania"];
+            //    }
+            //    else
+            //    {
+            //        message.CelFinansowania = string.Empty;
+            //    }
+
+            //    if (workflowProperties.Item["colUstalenia"] != null)
+            //    {
+            //        message.Ustalenia = workflowProperties.Item["colUstalenia"].ToString();
+            //    }
+            //    else
+            //    {
+            //        message.Ustalenia = string.Empty;
+            //    }
+
+            //    if (workflowProperties.Item["colStatusLeadu"] != null)
+            //    {
+            //        message.StatusLeadu = workflowProperties.Item["colStatusLeadu"].ToString();
+            //    }
+            //    else
+            //    {
+            //        message.StatusLeadu = String.Empty;
+            //    }
+
+
+            //    return true;
+            //}
+            //catch (Exception exp)
+            //{
+            //    throw;
+            //}
+
+            //return false;
+        }
+
+        private void KomunikatDlaAgenta(string tematWiadomosci, string trescWiadomosci)
+        {
+            //znajdź identyfikator kartoteki agenta
+
+            int partnerID = 0;
+            string emailAgenta = string.Empty;
+
+            if (workflowProperties.Item["colPartner.OsobaKontaktowa"] != null)
+            {
+                string idValue = workflowProperties.Item["colPartner.OsobaKontaktowa"].ToString();
+                int partial = idValue.LastIndexOf(";");
+                string idPure = idValue.Substring(0, partial);
+
+                partnerID = Convert.ToInt32(idPure);
+                emailAgenta = GetEmailAgenta(partnerID);
+            }
+
+
+            //sprawdź czy na kartotece jest włączona subskrybcja wiadomości
+            if (partnerID > 0 &&
+                emailAgenta != string.Empty &&
+                IsSubskrybcjaWiadomociAktywna(partnerID))
+            {
+                using (SPSite site = new SPSite(workflowProperties.SiteId))
+                {
+
+                    using (SPWeb web = site.AllWebs[workflowProperties.WebId])
+                    {
+                        SPList list = web.Lists["tabKolejkaWiadomosciEmail"];
+
+                        SPListItem item = list.AddItem();
+
+                        item["colDataPlanowanejWysylki"] = DateTime.Now;
+                        item["colEmailOdbiorcyWiadomosci"] = emailAgenta.ToString();
+                        //item["colEmailOdbiorcyKopiiWiadomosci"] =
+                        //item["colEmailNadawcyWiadomosci"] =
+                        item["colTematWiadomosci"] = tematWiadomosci.ToString();
+                        item["colTrescWiadomosci"] = trescWiadomosci.ToString();
+                        //item["colBodyHTML"] =
+                        //item["colStopkaWiadomosciHTML"] =
+                        item.Update();
+
+                    }
+                }
+            }
+        }
+
+        private string GetEmailAgenta(int partnerID)
+        {
+            using (SPSite site = new SPSite(workflowProperties.SiteId))
+            {
+                using (SPWeb web = site.AllWebs[workflowProperties.WebId])
+                {
+                    System.Text.StringBuilder sb = new System.Text.StringBuilder(@"<Where><Eq><FieldRef Name='ID'/><Value Type='Counter'>{__partnerID__}</Value></Eq></Where>");
+                    sb.Replace("{__partnerID__}", partnerID.ToString());
+                    string camlQuery = sb.ToString();
+
+                    SPList list = web.Lists[@"tabPartnerzy"];
+                    SPQuery query = new SPQuery();
+                    query.ViewFields = @"";
+                    query.Query = camlQuery;
+
+                    SPListItemCollection items = list.GetItems(query);
+                    if (items.Count == 1)
+                    {
+                        SPListItem item = items[0];
+
+                        if (item["colEmailOsobyKontaktowej"] != null)
+                        {
+                            return item["colEmailOsobyKontaktowej"].ToString();
+                        }
+                    }
+                }
+
+                return String.Empty;
+            }
+        }
+
+        private bool IsSubskrybcjaWiadomociAktywna(int partnerID)
+        {
+            using (SPSite site = new SPSite(workflowProperties.SiteId))
+            {
+                using (SPWeb web = site.AllWebs[workflowProperties.WebId])
+                {
+                    System.Text.StringBuilder sb = new System.Text.StringBuilder(@"<Where><Eq><FieldRef Name='ID'/><Value Type='Counter'>{__partnerID__}</Value></Eq></Where>");
+                    sb.Replace("{__partnerID__}", partnerID.ToString());
+                    string camlQuery = sb.ToString();
+
+                    SPList list = web.Lists[@"tabPartnerzy"];
+                    SPQuery query = new SPQuery();
+                    query.ViewFields = @"";
+                    query.Query = camlQuery;
+
+                    SPListItemCollection items = list.GetItems(query);
+                    if (items.Count == 1)
+                    {
+                        SPListItem item = items[0];
+
+                        if ((bool)item["colAktywny"] == true)
+                        {
+                            if ((bool)item["colWysylkaRaportuTygodniowego"] == true)
+                            {
+                                return true;
+                            }
+                        }
+
+                    }
+                }
+
+                return false;
+            }
+        }
+
+        #endregion
+
     }
 }
