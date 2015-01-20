@@ -15,6 +15,7 @@ using Microsoft.SharePoint;
 using Microsoft.SharePoint.Workflow;
 using Microsoft.SharePoint.WorkflowActions;
 using System.Text;
+using System.Net.Mail;
 
 namespace KontraktSMW.Workflow1
 {
@@ -43,7 +44,7 @@ namespace KontraktSMW.Workflow1
 
         private void IsStatusLeadu_Telefon(object sender, ConditionalEventArgs e)
         {
-            e.Result = NavigatorCodeConditionResult("colStatusLeadu", "Rozmowa");
+            e.Result = NavigatorCodeConditionResult("colStatusLeadu", "Telefon");
         }
 
         private void IsStatusLeadu_Umowa(object sender, ConditionalEventArgs e)
@@ -69,6 +70,11 @@ namespace KontraktSMW.Workflow1
         private void IsStatusLeadu_Stracony(object sender, ConditionalEventArgs e)
         {
             e.Result = NavigatorCodeConditionResult("colStatusLeadu", "Stracony");
+        }
+
+        private void IsStatusLeadu_ElseIf(object sender, ConditionalEventArgs e)
+        {
+            e.Result = true;
         }
 
         #endregion
@@ -332,9 +338,15 @@ namespace KontraktSMW.Workflow1
 
         #endregion
 
-
         #region Obsługa raportowania zmian statusu
 
+        /// <summary>
+        /// procedura obsługi zmian statusu rejestruje zmiany statusu wniosku w danym dniu roboczym
+        /// pierwsze wywołąnie procedury zakłada rekord w tablicy tabKontrakty_Aktywności
+        /// kolejne wywołania modyfikują status końcowy wniosku
+        /// </summary>
+        /// <param name="statusSTART"></param>
+        /// <param name="statusEND"></param>
         private void StatusChangeUpdate(string statusSTART, string statusEND)
         {
             int kontraktID = workflowProperties.ItemId;
@@ -777,9 +789,86 @@ namespace KontraktSMW.Workflow1
 
         #endregion
 
-        private void IsStatus_Lead_Else(object sender, ConditionalEventArgs e)
+        #region Helpers
+
+        public bool SendDirectMail(string subject, string body)
         {
-            e.Result = true;
+            //Ustaw dla każdego modułu indywidualnie
+            string from = "ERR.ML.ObslugaKontraktu<noreply@stafix24.pl>";
+            string to = "biuro@rawcom24.pl";
+
+
+            //TurboSMTP config parameters
+            const string sMTPServerName = "pro.turbo-smtp.com";//
+            const string sMTPLoginName = "biuro@rawcom24.pl";
+            const string sMTPPassword = "Rogalaewa1";
+            const int sMTPPort = 587;
+
+            MailMessage msg = new MailMessage(from, to);
+            msg.Subject = subject;
+            msg.Body = body;
+            msg.BodyEncoding = Encoding.UTF8;
+            msg.IsBodyHtml = true;
+
+            SmtpClient client = new SmtpClient(sMTPServerName, sMTPPort);
+            System.Net.NetworkCredential basicCredential = new System.Net.NetworkCredential(sMTPLoginName, sMTPPassword);
+            client.EnableSsl = false;
+            client.UseDefaultCredentials = true;
+            client.Credentials = basicCredential;
+            try
+            {
+                client.Send(msg);
+            }
+            catch (Exception)
+            {
+                WriteToHistoryLog("DirectSendMail", "ERR");
+                return false;
+            }
+
+            return true;
+        }
+
+        private void CustomErrorHandler(Exception e)
+        {
+
+            StringBuilder sb = new StringBuilder();
+
+            try
+            {
+                sb.AppendFormat(@"<table><tr><td>{0}</td><td>{1}</td></tr></table>", "Message", e.Message.ToString());
+                sb.AppendFormat(@"<table><tr><td>{0}</td><td>{1}</td></tr></table>", "Source", e.Source.ToString());
+                sb.AppendFormat(@"<table><tr><td>{0}</td><td>{1}</td></tr></table>", "Target Site", e.TargetSite.ToString());
+                sb.AppendFormat(@"<table><tr><td>{0}</td><td>{1}</td></tr></table>", "Stack Trace", e.StackTrace.ToString());
+                sb.AppendFormat(@"<table><tr><td>{0}</td><td>{1}</td></tr></table>", "Workflow Context", workflowProperties.Context.ToString());
+
+            }
+            catch (Exception)
+            {
+                sb.AppendLine("Problem z odczytem pozostałych szczegółów");
+            }
+
+            WriteToHistoryLog(e.Message.ToString(), "ERR");
+
+            SendDirectMail(e.Message.ToString(), sb.ToString());
+
+        }
+
+        private void WriteToHistoryLog(string description, string outcome)
+        {
+            SPWeb web = workflowProperties.Web;
+            Guid workflow = workflowProperties.WorkflowId;
+
+            TimeSpan ts = new TimeSpan();
+            SPWorkflow.CreateHistoryEvent(web, workflow, 0, web.CurrentUser, ts,
+                outcome, description, string.Empty);
+        }
+
+        #endregion
+
+        private void codeActivity1_ExecuteCode(object sender, EventArgs e)
+        {
+            WriteToHistoryLog("to jest opis testowy", "TEST");
+            SendDirectMail("To jest przykłądowy tytuł", "to jest przykładowa treść");
         }
 
     }

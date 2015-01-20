@@ -248,6 +248,7 @@ namespace KontraktSMW.Workflow1
             this.onWorkflowItemChanged13 = new Microsoft.SharePoint.WorkflowActions.OnWorkflowItemChanged();
             this.faultHandlersActivity3 = new System.Workflow.ComponentModel.FaultHandlersActivity();
             this.Navigator_Routing = new System.Workflow.Activities.IfElseActivity();
+            this.codeActivity1 = new System.Workflow.Activities.CodeActivity();
             this.logRouter = new Microsoft.SharePoint.WorkflowActions.LogToHistoryListActivity();
             this.faultHandlersActivity1 = new System.Workflow.ComponentModel.FaultHandlersActivity();
             this.setStateActivity1 = new System.Workflow.Activities.SetStateActivity();
@@ -801,7 +802,7 @@ namespace KontraktSMW.Workflow1
             // Status_Lead_Else
             // 
             this.Status_Lead_Else.Activities.Add(this.setStateActivity27);
-            codecondition23.Condition += new System.EventHandler<System.Workflow.Activities.ConditionalEventArgs>(this.IsStatus_Lead_Else);
+            codecondition23.Condition += new System.EventHandler<System.Workflow.Activities.ConditionalEventArgs>(this.IsStatusLeadu_ElseIf);
             this.Status_Lead_Else.Condition = codecondition23;
             this.Status_Lead_Else.Name = "Status_Lead_Else";
             // 
@@ -1418,6 +1419,11 @@ namespace KontraktSMW.Workflow1
             this.Navigator_Routing.Activities.Add(this.Status_Lead_Else);
             this.Navigator_Routing.Name = "Navigator_Routing";
             // 
+            // codeActivity1
+            // 
+            this.codeActivity1.Name = "codeActivity1";
+            this.codeActivity1.ExecuteCode += new System.EventHandler(this.codeActivity1_ExecuteCode);
+            // 
             // logRouter
             // 
             this.logRouter.Duration = System.TimeSpan.Parse("-10675199.02:48:05.4775808");
@@ -1644,6 +1650,7 @@ namespace KontraktSMW.Workflow1
             // stateInitializationActivity15
             // 
             this.stateInitializationActivity15.Activities.Add(this.logRouter);
+            this.stateInitializationActivity15.Activities.Add(this.codeActivity1);
             this.stateInitializationActivity15.Activities.Add(this.Navigator_Routing);
             this.stateInitializationActivity15.Activities.Add(this.faultHandlersActivity3);
             this.stateInitializationActivity15.Name = "stateInitializationActivity15";
@@ -1781,6 +1788,8 @@ namespace KontraktSMW.Workflow1
         }
 
         #endregion
+
+        private CodeActivity codeActivity1;
 
         private IfElseBranchActivity Status_Lead_Else;
 
@@ -2211,6 +2220,11 @@ namespace KontraktSMW.Workflow1
         private StateActivity Navigator;
 
         private StateActivity Start;
+
+
+
+
+
 
 
 
