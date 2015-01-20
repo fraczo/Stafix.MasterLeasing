@@ -26,6 +26,21 @@ namespace KontraktSMW.Workflow1
         private void InitializeComponent()
         {
             this.CanModifyActivities = true;
+            System.Workflow.ComponentModel.ActivityBind activitybind1 = new System.Workflow.ComponentModel.ActivityBind();
+            System.Workflow.ComponentModel.ActivityBind activitybind2 = new System.Workflow.ComponentModel.ActivityBind();
+            System.Workflow.Runtime.CorrelationToken correlationtoken1 = new System.Workflow.Runtime.CorrelationToken();
+            System.Workflow.ComponentModel.ActivityBind activitybind3 = new System.Workflow.ComponentModel.ActivityBind();
+            System.Workflow.ComponentModel.ActivityBind activitybind4 = new System.Workflow.ComponentModel.ActivityBind();
+            System.Workflow.ComponentModel.ActivityBind activitybind5 = new System.Workflow.ComponentModel.ActivityBind();
+            System.Workflow.ComponentModel.ActivityBind activitybind6 = new System.Workflow.ComponentModel.ActivityBind();
+            System.Workflow.Runtime.CorrelationToken correlationtoken2 = new System.Workflow.Runtime.CorrelationToken();
+            System.Workflow.ComponentModel.ActivityBind activitybind7 = new System.Workflow.ComponentModel.ActivityBind();
+            System.Workflow.ComponentModel.ActivityBind activitybind8 = new System.Workflow.ComponentModel.ActivityBind();
+            System.Workflow.ComponentModel.ActivityBind activitybind9 = new System.Workflow.ComponentModel.ActivityBind();
+            System.Workflow.ComponentModel.ActivityBind activitybind10 = new System.Workflow.ComponentModel.ActivityBind();
+            System.Workflow.Runtime.CorrelationToken correlationtoken3 = new System.Workflow.Runtime.CorrelationToken();
+            System.Workflow.ComponentModel.ActivityBind activitybind11 = new System.Workflow.ComponentModel.ActivityBind();
+            System.Workflow.ComponentModel.ActivityBind activitybind12 = new System.Workflow.ComponentModel.ActivityBind();
             System.Workflow.Activities.CodeCondition codecondition1 = new System.Workflow.Activities.CodeCondition();
             System.Workflow.Activities.CodeCondition codecondition2 = new System.Workflow.Activities.CodeCondition();
             System.Workflow.Activities.CodeCondition codecondition3 = new System.Workflow.Activities.CodeCondition();
@@ -55,10 +70,7 @@ namespace KontraktSMW.Workflow1
             System.Workflow.Activities.CodeCondition codecondition27 = new System.Workflow.Activities.CodeCondition();
             System.Workflow.Activities.CodeCondition codecondition28 = new System.Workflow.Activities.CodeCondition();
             System.Workflow.Activities.CodeCondition codecondition29 = new System.Workflow.Activities.CodeCondition();
-            System.Workflow.ComponentModel.ActivityBind activitybind1 = new System.Workflow.ComponentModel.ActivityBind();
-            System.Workflow.Runtime.CorrelationToken correlationtoken1 = new System.Workflow.Runtime.CorrelationToken();
-            System.Workflow.Runtime.CorrelationToken correlationtoken2 = new System.Workflow.Runtime.CorrelationToken();
-            System.Workflow.Runtime.CorrelationToken correlationtoken3 = new System.Workflow.Runtime.CorrelationToken();
+            System.Workflow.ComponentModel.ActivityBind activitybind13 = new System.Workflow.ComponentModel.ActivityBind();
             System.Workflow.Runtime.CorrelationToken correlationtoken4 = new System.Workflow.Runtime.CorrelationToken();
             System.Workflow.Runtime.CorrelationToken correlationtoken5 = new System.Workflow.Runtime.CorrelationToken();
             System.Workflow.Runtime.CorrelationToken correlationtoken6 = new System.Workflow.Runtime.CorrelationToken();
@@ -75,7 +87,11 @@ namespace KontraktSMW.Workflow1
             System.Workflow.Runtime.CorrelationToken correlationtoken17 = new System.Workflow.Runtime.CorrelationToken();
             System.Workflow.Runtime.CorrelationToken correlationtoken18 = new System.Workflow.Runtime.CorrelationToken();
             System.Workflow.Runtime.CorrelationToken correlationtoken19 = new System.Workflow.Runtime.CorrelationToken();
+            System.Workflow.ComponentModel.ActivityBind activitybind14 = new System.Workflow.ComponentModel.ActivityBind();
+            System.Workflow.ComponentModel.ActivityBind activitybind15 = new System.Workflow.ComponentModel.ActivityBind();
             System.Workflow.Runtime.CorrelationToken correlationtoken20 = new System.Workflow.Runtime.CorrelationToken();
+            System.Workflow.ComponentModel.ActivityBind activitybind16 = new System.Workflow.ComponentModel.ActivityBind();
+            System.Workflow.ComponentModel.ActivityBind activitybind17 = new System.Workflow.ComponentModel.ActivityBind();
             System.Workflow.Runtime.CorrelationToken correlationtoken21 = new System.Workflow.Runtime.CorrelationToken();
             System.Workflow.Runtime.CorrelationToken correlationtoken22 = new System.Workflow.Runtime.CorrelationToken();
             System.Workflow.Runtime.CorrelationToken correlationtoken23 = new System.Workflow.Runtime.CorrelationToken();
@@ -83,7 +99,7 @@ namespace KontraktSMW.Workflow1
             System.Workflow.Runtime.CorrelationToken correlationtoken25 = new System.Workflow.Runtime.CorrelationToken();
             System.Workflow.Runtime.CorrelationToken correlationtoken26 = new System.Workflow.Runtime.CorrelationToken();
             System.Workflow.Runtime.CorrelationToken correlationtoken27 = new System.Workflow.Runtime.CorrelationToken();
-            System.Workflow.ComponentModel.ActivityBind activitybind2 = new System.Workflow.ComponentModel.ActivityBind();
+            System.Workflow.ComponentModel.ActivityBind activitybind18 = new System.Workflow.ComponentModel.ActivityBind();
             this.logToHistoryListActivity4 = new Microsoft.SharePoint.WorkflowActions.LogToHistoryListActivity();
             this.setStateActivity21 = new System.Workflow.Activities.SetStateActivity();
             this.setStateActivity22 = new System.Workflow.Activities.SetStateActivity();
@@ -95,6 +111,7 @@ namespace KontraktSMW.Workflow1
             this.Komunikat_UmowaStracona = new System.Workflow.Activities.CodeActivity();
             this.setStateActivity20 = new System.Workflow.Activities.SetStateActivity();
             this.StatusUmowa_Uruchomienie = new System.Workflow.Activities.CodeActivity();
+            this.sendEmail_UmowaZaakceptowana = new Microsoft.SharePoint.WorkflowActions.SendEmail();
             this.Komunikat_UmowaUruchomiona = new System.Workflow.Activities.CodeActivity();
             this.setStateActivity19 = new System.Workflow.Activities.SetStateActivity();
             this.setStateActivity17 = new System.Workflow.Activities.SetStateActivity();
@@ -104,6 +121,7 @@ namespace KontraktSMW.Workflow1
             this.setStateActivity15 = new System.Workflow.Activities.SetStateActivity();
             this.setStateActivity14 = new System.Workflow.Activities.SetStateActivity();
             this.StatusWniosek_Umowa = new System.Workflow.Activities.CodeActivity();
+            this.sendEmail_WniosekZaakceptowany = new Microsoft.SharePoint.WorkflowActions.SendEmail();
             this.Komunikat_AkceptacjaWniosku = new System.Workflow.Activities.CodeActivity();
             this.setStateActivity13 = new System.Workflow.Activities.SetStateActivity();
             this.setStateActivity8 = new System.Workflow.Activities.SetStateActivity();
@@ -115,6 +133,7 @@ namespace KontraktSMW.Workflow1
             this.Komunikat_OfertaNiezaakceptowana = new System.Workflow.Activities.CodeActivity();
             this.setStateActivity11 = new System.Workflow.Activities.SetStateActivity();
             this.StatusOferta_Wniosek = new System.Workflow.Activities.CodeActivity();
+            this.sendEmail_OfertaZaakceptowana = new Microsoft.SharePoint.WorkflowActions.SendEmail();
             this.Komunikat_AkceptacjaOferty = new System.Workflow.Activities.CodeActivity();
             this.setStateActivity5 = new System.Workflow.Activities.SetStateActivity();
             this.setStateActivity10 = new System.Workflow.Activities.SetStateActivity();
@@ -226,7 +245,7 @@ namespace KontraktSMW.Workflow1
             this.logToHistoryListActivity5 = new Microsoft.SharePoint.WorkflowActions.LogToHistoryListActivity();
             this.setStateActivity26 = new System.Workflow.Activities.SetStateActivity();
             this.SetCT_Odrzucony = new System.Workflow.Activities.CodeActivity();
-            this.Komunikat_Odrzucony = new System.Workflow.Activities.CodeActivity();
+            this.sendEmail_Stracony = new Microsoft.SharePoint.WorkflowActions.SendEmail();
             this.logToHistoryListActivity2 = new Microsoft.SharePoint.WorkflowActions.LogToHistoryListActivity();
             this.setState_Odrzucony = new Microsoft.SharePoint.WorkflowActions.SetState();
             this.Oferta_Routing = new System.Workflow.Activities.IfElseActivity();
@@ -363,6 +382,30 @@ namespace KontraktSMW.Workflow1
             this.StatusUmowa_Uruchomienie.Name = "StatusUmowa_Uruchomienie";
             this.StatusUmowa_Uruchomienie.ExecuteCode += new System.EventHandler(this.StatusUmowa_Uruchomienie_ExecuteCode);
             // 
+            // sendEmail_UmowaZaakceptowana
+            // 
+            activitybind1.Name = "Workflow1";
+            activitybind1.Path = "Mail_BCC";
+            activitybind2.Name = "Workflow1";
+            activitybind2.Path = "Mail_Body";
+            this.sendEmail_UmowaZaakceptowana.CC = null;
+            correlationtoken1.Name = "myWorkflowToken";
+            correlationtoken1.OwnerActivityName = "Workflow1";
+            this.sendEmail_UmowaZaakceptowana.CorrelationToken = correlationtoken1;
+            this.sendEmail_UmowaZaakceptowana.From = null;
+            this.sendEmail_UmowaZaakceptowana.Headers = null;
+            this.sendEmail_UmowaZaakceptowana.IncludeStatus = false;
+            this.sendEmail_UmowaZaakceptowana.Name = "sendEmail_UmowaZaakceptowana";
+            activitybind3.Name = "Workflow1";
+            activitybind3.Path = "Mail_Subject";
+            activitybind4.Name = "Workflow1";
+            activitybind4.Path = "Mail_To";
+            this.sendEmail_UmowaZaakceptowana.MethodInvoking += new System.EventHandler(this.sendEmail_UmowaZaakceptowana_MethodInvoking);
+            this.sendEmail_UmowaZaakceptowana.SetBinding(Microsoft.SharePoint.WorkflowActions.SendEmail.BCCProperty, ((System.Workflow.ComponentModel.ActivityBind)(activitybind1)));
+            this.sendEmail_UmowaZaakceptowana.SetBinding(Microsoft.SharePoint.WorkflowActions.SendEmail.BodyProperty, ((System.Workflow.ComponentModel.ActivityBind)(activitybind2)));
+            this.sendEmail_UmowaZaakceptowana.SetBinding(Microsoft.SharePoint.WorkflowActions.SendEmail.SubjectProperty, ((System.Workflow.ComponentModel.ActivityBind)(activitybind3)));
+            this.sendEmail_UmowaZaakceptowana.SetBinding(Microsoft.SharePoint.WorkflowActions.SendEmail.ToProperty, ((System.Workflow.ComponentModel.ActivityBind)(activitybind4)));
+            // 
             // Komunikat_UmowaUruchomiona
             // 
             this.Komunikat_UmowaUruchomiona.Enabled = false;
@@ -409,6 +452,29 @@ namespace KontraktSMW.Workflow1
             // 
             this.StatusWniosek_Umowa.Name = "StatusWniosek_Umowa";
             this.StatusWniosek_Umowa.ExecuteCode += new System.EventHandler(this.StatusWniosek_Umowa_ExecuteCode);
+            // 
+            // sendEmail_WniosekZaakceptowany
+            // 
+            activitybind5.Name = "Workflow1";
+            activitybind5.Path = "Mail_BCC";
+            activitybind6.Name = "Workflow1";
+            activitybind6.Path = "Mail_Body";
+            this.sendEmail_WniosekZaakceptowany.CC = null;
+            correlationtoken2.Name = "myWorkflowToken";
+            correlationtoken2.OwnerActivityName = "Workflow1";
+            this.sendEmail_WniosekZaakceptowany.CorrelationToken = correlationtoken2;
+            this.sendEmail_WniosekZaakceptowany.From = null;
+            this.sendEmail_WniosekZaakceptowany.Headers = null;
+            this.sendEmail_WniosekZaakceptowany.IncludeStatus = false;
+            this.sendEmail_WniosekZaakceptowany.Name = "sendEmail_WniosekZaakceptowany";
+            activitybind7.Name = "Workflow1";
+            activitybind7.Path = "Mail_Subject";
+            activitybind8.Name = "Workflow1";
+            activitybind8.Path = "Mail_To";
+            this.sendEmail_WniosekZaakceptowany.SetBinding(Microsoft.SharePoint.WorkflowActions.SendEmail.BCCProperty, ((System.Workflow.ComponentModel.ActivityBind)(activitybind5)));
+            this.sendEmail_WniosekZaakceptowany.SetBinding(Microsoft.SharePoint.WorkflowActions.SendEmail.BodyProperty, ((System.Workflow.ComponentModel.ActivityBind)(activitybind6)));
+            this.sendEmail_WniosekZaakceptowany.SetBinding(Microsoft.SharePoint.WorkflowActions.SendEmail.SubjectProperty, ((System.Workflow.ComponentModel.ActivityBind)(activitybind7)));
+            this.sendEmail_WniosekZaakceptowany.SetBinding(Microsoft.SharePoint.WorkflowActions.SendEmail.ToProperty, ((System.Workflow.ComponentModel.ActivityBind)(activitybind8)));
             // 
             // Komunikat_AkceptacjaWniosku
             // 
@@ -466,6 +532,30 @@ namespace KontraktSMW.Workflow1
             // 
             this.StatusOferta_Wniosek.Name = "StatusOferta_Wniosek";
             this.StatusOferta_Wniosek.ExecuteCode += new System.EventHandler(this.StatusOferta_Wniosek_ExecuteCode);
+            // 
+            // sendEmail_OfertaZaakceptowana
+            // 
+            activitybind9.Name = "Workflow1";
+            activitybind9.Path = "Mail_BCC";
+            activitybind10.Name = "Workflow1";
+            activitybind10.Path = "Mail_Body";
+            this.sendEmail_OfertaZaakceptowana.CC = null;
+            correlationtoken3.Name = "myWorkflowToken";
+            correlationtoken3.OwnerActivityName = "Workflow1";
+            this.sendEmail_OfertaZaakceptowana.CorrelationToken = correlationtoken3;
+            this.sendEmail_OfertaZaakceptowana.From = null;
+            this.sendEmail_OfertaZaakceptowana.Headers = null;
+            this.sendEmail_OfertaZaakceptowana.IncludeStatus = false;
+            this.sendEmail_OfertaZaakceptowana.Name = "sendEmail_OfertaZaakceptowana";
+            activitybind11.Name = "Workflow1";
+            activitybind11.Path = "Mail_Subject";
+            activitybind12.Name = "Workflow1";
+            activitybind12.Path = "Mail_To";
+            this.sendEmail_OfertaZaakceptowana.MethodInvoking += new System.EventHandler(this.sendEmail_OfertaZaakceptowana_MethodInvoking);
+            this.sendEmail_OfertaZaakceptowana.SetBinding(Microsoft.SharePoint.WorkflowActions.SendEmail.BCCProperty, ((System.Workflow.ComponentModel.ActivityBind)(activitybind9)));
+            this.sendEmail_OfertaZaakceptowana.SetBinding(Microsoft.SharePoint.WorkflowActions.SendEmail.BodyProperty, ((System.Workflow.ComponentModel.ActivityBind)(activitybind10)));
+            this.sendEmail_OfertaZaakceptowana.SetBinding(Microsoft.SharePoint.WorkflowActions.SendEmail.SubjectProperty, ((System.Workflow.ComponentModel.ActivityBind)(activitybind11)));
+            this.sendEmail_OfertaZaakceptowana.SetBinding(Microsoft.SharePoint.WorkflowActions.SendEmail.ToProperty, ((System.Workflow.ComponentModel.ActivityBind)(activitybind12)));
             // 
             // Komunikat_AkceptacjaOferty
             // 
@@ -635,6 +725,7 @@ namespace KontraktSMW.Workflow1
             // AkceptacjaUmowy_Uruchomienie
             // 
             this.AkceptacjaUmowy_Uruchomienie.Activities.Add(this.Komunikat_UmowaUruchomiona);
+            this.AkceptacjaUmowy_Uruchomienie.Activities.Add(this.sendEmail_UmowaZaakceptowana);
             this.AkceptacjaUmowy_Uruchomienie.Activities.Add(this.StatusUmowa_Uruchomienie);
             this.AkceptacjaUmowy_Uruchomienie.Activities.Add(this.setStateActivity20);
             codecondition5.Condition += new System.EventHandler<System.Workflow.Activities.ConditionalEventArgs>(this.IsAkceptacjaUmowy_Uruchomienie);
@@ -674,6 +765,7 @@ namespace KontraktSMW.Workflow1
             // AkceptacjaWniosku_Umowa
             // 
             this.AkceptacjaWniosku_Umowa.Activities.Add(this.Komunikat_AkceptacjaWniosku);
+            this.AkceptacjaWniosku_Umowa.Activities.Add(this.sendEmail_WniosekZaakceptowany);
             this.AkceptacjaWniosku_Umowa.Activities.Add(this.StatusWniosek_Umowa);
             this.AkceptacjaWniosku_Umowa.Activities.Add(this.setStateActivity14);
             codecondition10.Condition += new System.EventHandler<System.Workflow.Activities.ConditionalEventArgs>(this.IsAkceptacjaWniosku_Umowa);
@@ -721,6 +813,7 @@ namespace KontraktSMW.Workflow1
             // AkceptacjaOferty_Wniosek
             // 
             this.AkceptacjaOferty_Wniosek.Activities.Add(this.Komunikat_AkceptacjaOferty);
+            this.AkceptacjaOferty_Wniosek.Activities.Add(this.sendEmail_OfertaZaakceptowana);
             this.AkceptacjaOferty_Wniosek.Activities.Add(this.StatusOferta_Wniosek);
             this.AkceptacjaOferty_Wniosek.Activities.Add(this.setStateActivity11);
             codecondition16.Condition += new System.EventHandler<System.Workflow.Activities.ConditionalEventArgs>(this.IsAkceptacjaOferty_Wniosek);
@@ -867,13 +960,13 @@ namespace KontraktSMW.Workflow1
             this.logToHistoryListActivity3.Duration = System.TimeSpan.Parse("-10675199.02:48:05.4775808");
             this.logToHistoryListActivity3.Enabled = false;
             this.logToHistoryListActivity3.EventId = Microsoft.SharePoint.Workflow.SPWorkflowHistoryEventType.WorkflowComment;
-            activitybind1.Name = "Workflow1";
-            activitybind1.Path = "logRozliczenie_DodajDoRozliczen";
+            activitybind13.Name = "Workflow1";
+            activitybind13.Path = "logRozliczenie_DodajDoRozliczen";
             this.logToHistoryListActivity3.HistoryOutcome = "";
             this.logToHistoryListActivity3.Name = "logToHistoryListActivity3";
             this.logToHistoryListActivity3.OtherData = "";
             this.logToHistoryListActivity3.UserId = -1;
-            this.logToHistoryListActivity3.SetBinding(Microsoft.SharePoint.WorkflowActions.LogToHistoryListActivity.HistoryDescriptionProperty, ((System.Workflow.ComponentModel.ActivityBind)(activitybind1)));
+            this.logToHistoryListActivity3.SetBinding(Microsoft.SharePoint.WorkflowActions.LogToHistoryListActivity.HistoryDescriptionProperty, ((System.Workflow.ComponentModel.ActivityBind)(activitybind13)));
             // 
             // nRozliczenie_DodajDoRozliczen
             // 
@@ -888,9 +981,9 @@ namespace KontraktSMW.Workflow1
             // 
             // setState_Rozliczenie
             // 
-            correlationtoken1.Name = "myWorkflowToken";
-            correlationtoken1.OwnerActivityName = "Workflow1";
-            this.setState_Rozliczenie.CorrelationToken = correlationtoken1;
+            correlationtoken4.Name = "myWorkflowToken";
+            correlationtoken4.OwnerActivityName = "Workflow1";
+            this.setState_Rozliczenie.CorrelationToken = correlationtoken4;
             this.setState_Rozliczenie.Name = "setState_Rozliczenie";
             this.setState_Rozliczenie.State = 26;
             // 
@@ -913,9 +1006,9 @@ namespace KontraktSMW.Workflow1
             // 
             this.onWorkflowItemChanged11.AfterProperties = null;
             this.onWorkflowItemChanged11.BeforeProperties = null;
-            correlationtoken2.Name = "myWorkflowToken";
-            correlationtoken2.OwnerActivityName = "Workflow1";
-            this.onWorkflowItemChanged11.CorrelationToken = correlationtoken2;
+            correlationtoken5.Name = "myWorkflowToken";
+            correlationtoken5.OwnerActivityName = "Workflow1";
+            this.onWorkflowItemChanged11.CorrelationToken = correlationtoken5;
             this.onWorkflowItemChanged11.Name = "onWorkflowItemChanged11";
             // 
             // SetCT_Dokumentacja
@@ -925,9 +1018,9 @@ namespace KontraktSMW.Workflow1
             // 
             // setState_Dokumentacja
             // 
-            correlationtoken3.Name = "myWorkflowToken";
-            correlationtoken3.OwnerActivityName = "Workflow1";
-            this.setState_Dokumentacja.CorrelationToken = correlationtoken3;
+            correlationtoken6.Name = "myWorkflowToken";
+            correlationtoken6.OwnerActivityName = "Workflow1";
+            this.setState_Dokumentacja.CorrelationToken = correlationtoken6;
             this.setState_Dokumentacja.Name = "setState_Dokumentacja";
             this.setState_Dokumentacja.State = 24;
             // 
@@ -950,9 +1043,9 @@ namespace KontraktSMW.Workflow1
             // 
             this.onWorkflowItemChanged12.AfterProperties = null;
             this.onWorkflowItemChanged12.BeforeProperties = null;
-            correlationtoken4.Name = "myWorkflowToken";
-            correlationtoken4.OwnerActivityName = "Workflow1";
-            this.onWorkflowItemChanged12.CorrelationToken = correlationtoken4;
+            correlationtoken7.Name = "myWorkflowToken";
+            correlationtoken7.OwnerActivityName = "Workflow1";
+            this.onWorkflowItemChanged12.CorrelationToken = correlationtoken7;
             this.onWorkflowItemChanged12.Name = "onWorkflowItemChanged12";
             // 
             // SetCT_Uruchomienie
@@ -962,9 +1055,9 @@ namespace KontraktSMW.Workflow1
             // 
             // setState_Uruchomienie
             // 
-            correlationtoken5.Name = "myWorkflowToken";
-            correlationtoken5.OwnerActivityName = "Workflow1";
-            this.setState_Uruchomienie.CorrelationToken = correlationtoken5;
+            correlationtoken8.Name = "myWorkflowToken";
+            correlationtoken8.OwnerActivityName = "Workflow1";
+            this.setState_Uruchomienie.CorrelationToken = correlationtoken8;
             this.setState_Uruchomienie.Name = "setState_Uruchomienie";
             this.setState_Uruchomienie.State = 25;
             // 
@@ -989,9 +1082,7 @@ namespace KontraktSMW.Workflow1
             // 
             this.onWorkflowItemChanged10.AfterProperties = null;
             this.onWorkflowItemChanged10.BeforeProperties = null;
-            correlationtoken6.Name = "myWorkflowToken";
-            correlationtoken6.OwnerActivityName = "Workflow1";
-            this.onWorkflowItemChanged10.CorrelationToken = correlationtoken6;
+            this.onWorkflowItemChanged10.CorrelationToken = correlationtoken1;
             this.onWorkflowItemChanged10.Name = "onWorkflowItemChanged10";
             // 
             // SetCT_AkceptacjaUmowy
@@ -1001,9 +1092,9 @@ namespace KontraktSMW.Workflow1
             // 
             // setState_AkceptacjaUmowy
             // 
-            correlationtoken7.Name = "myWorkflowToken";
-            correlationtoken7.OwnerActivityName = "Workflow1";
-            this.setState_AkceptacjaUmowy.CorrelationToken = correlationtoken7;
+            correlationtoken9.Name = "myWorkflowToken";
+            correlationtoken9.OwnerActivityName = "Workflow1";
+            this.setState_AkceptacjaUmowy.CorrelationToken = correlationtoken9;
             this.setState_AkceptacjaUmowy.Name = "setState_AkceptacjaUmowy";
             this.setState_AkceptacjaUmowy.State = 28;
             // 
@@ -1026,9 +1117,9 @@ namespace KontraktSMW.Workflow1
             // 
             this.onWorkflowItemChanged9.AfterProperties = null;
             this.onWorkflowItemChanged9.BeforeProperties = null;
-            correlationtoken8.Name = "myWorkflowToken";
-            correlationtoken8.OwnerActivityName = "Workflow1";
-            this.onWorkflowItemChanged9.CorrelationToken = correlationtoken8;
+            correlationtoken10.Name = "myWorkflowToken";
+            correlationtoken10.OwnerActivityName = "Workflow1";
+            this.onWorkflowItemChanged9.CorrelationToken = correlationtoken10;
             this.onWorkflowItemChanged9.Name = "onWorkflowItemChanged9";
             // 
             // SetCT_Umowa
@@ -1038,9 +1129,9 @@ namespace KontraktSMW.Workflow1
             // 
             // setState_Umowa
             // 
-            correlationtoken9.Name = "myWorkflowToken";
-            correlationtoken9.OwnerActivityName = "Workflow1";
-            this.setState_Umowa.CorrelationToken = correlationtoken9;
+            correlationtoken11.Name = "myWorkflowToken";
+            correlationtoken11.OwnerActivityName = "Workflow1";
+            this.setState_Umowa.CorrelationToken = correlationtoken11;
             this.setState_Umowa.Name = "setState_Umowa";
             this.setState_Umowa.State = 23;
             // 
@@ -1063,9 +1154,9 @@ namespace KontraktSMW.Workflow1
             // 
             this.onWorkflowItemChanged8.AfterProperties = null;
             this.onWorkflowItemChanged8.BeforeProperties = null;
-            correlationtoken10.Name = "myWorkflowToken";
-            correlationtoken10.OwnerActivityName = "Workflow1";
-            this.onWorkflowItemChanged8.CorrelationToken = correlationtoken10;
+            correlationtoken12.Name = "myWorkflowToken";
+            correlationtoken12.OwnerActivityName = "Workflow1";
+            this.onWorkflowItemChanged8.CorrelationToken = correlationtoken12;
             this.onWorkflowItemChanged8.Name = "onWorkflowItemChanged8";
             // 
             // SetCT_Wniosek1
@@ -1075,9 +1166,9 @@ namespace KontraktSMW.Workflow1
             // 
             // setState_KorektaWniosku
             // 
-            correlationtoken11.Name = "myWorkflowToken";
-            correlationtoken11.OwnerActivityName = "Workflow1";
-            this.setState_KorektaWniosku.CorrelationToken = correlationtoken11;
+            correlationtoken13.Name = "myWorkflowToken";
+            correlationtoken13.OwnerActivityName = "Workflow1";
+            this.setState_KorektaWniosku.CorrelationToken = correlationtoken13;
             this.setState_KorektaWniosku.Name = "setState_KorektaWniosku";
             this.setState_KorektaWniosku.State = 27;
             // 
@@ -1102,9 +1193,7 @@ namespace KontraktSMW.Workflow1
             // 
             this.onWorkflowItemChanged7.AfterProperties = null;
             this.onWorkflowItemChanged7.BeforeProperties = null;
-            correlationtoken12.Name = "myWorkflowToken";
-            correlationtoken12.OwnerActivityName = "Workflow1";
-            this.onWorkflowItemChanged7.CorrelationToken = correlationtoken12;
+            this.onWorkflowItemChanged7.CorrelationToken = correlationtoken2;
             this.onWorkflowItemChanged7.Name = "onWorkflowItemChanged7";
             // 
             // SetCT_AkceptacjaWniosku
@@ -1114,9 +1203,9 @@ namespace KontraktSMW.Workflow1
             // 
             // setState_AkceptacjaWniosku
             // 
-            correlationtoken13.Name = "myWorkflowToken";
-            correlationtoken13.OwnerActivityName = "Workflow1";
-            this.setState_AkceptacjaWniosku.CorrelationToken = correlationtoken13;
+            correlationtoken14.Name = "myWorkflowToken";
+            correlationtoken14.OwnerActivityName = "Workflow1";
+            this.setState_AkceptacjaWniosku.CorrelationToken = correlationtoken14;
             this.setState_AkceptacjaWniosku.Name = "setState_AkceptacjaWniosku";
             this.setState_AkceptacjaWniosku.State = 22;
             // 
@@ -1139,9 +1228,9 @@ namespace KontraktSMW.Workflow1
             // 
             this.onWorkflowItemChanged6.AfterProperties = null;
             this.onWorkflowItemChanged6.BeforeProperties = null;
-            correlationtoken14.Name = "myWorkflowToken";
-            correlationtoken14.OwnerActivityName = "Workflow1";
-            this.onWorkflowItemChanged6.CorrelationToken = correlationtoken14;
+            correlationtoken15.Name = "myWorkflowToken";
+            correlationtoken15.OwnerActivityName = "Workflow1";
+            this.onWorkflowItemChanged6.CorrelationToken = correlationtoken15;
             this.onWorkflowItemChanged6.Name = "onWorkflowItemChanged6";
             // 
             // SetCT_Wniosek
@@ -1151,9 +1240,9 @@ namespace KontraktSMW.Workflow1
             // 
             // setState_Wniosek
             // 
-            correlationtoken15.Name = "myWorkflowToken";
-            correlationtoken15.OwnerActivityName = "Workflow1";
-            this.setState_Wniosek.CorrelationToken = correlationtoken15;
+            correlationtoken16.Name = "myWorkflowToken";
+            correlationtoken16.OwnerActivityName = "Workflow1";
+            this.setState_Wniosek.CorrelationToken = correlationtoken16;
             this.setState_Wniosek.Name = "setState_Wniosek";
             this.setState_Wniosek.State = 21;
             // 
@@ -1176,9 +1265,9 @@ namespace KontraktSMW.Workflow1
             // 
             this.onWorkflowItemChanged5.AfterProperties = null;
             this.onWorkflowItemChanged5.BeforeProperties = null;
-            correlationtoken16.Name = "myWorkflowToken";
-            correlationtoken16.OwnerActivityName = "Workflow1";
-            this.onWorkflowItemChanged5.CorrelationToken = correlationtoken16;
+            correlationtoken17.Name = "myWorkflowToken";
+            correlationtoken17.OwnerActivityName = "Workflow1";
+            this.onWorkflowItemChanged5.CorrelationToken = correlationtoken17;
             this.onWorkflowItemChanged5.Name = "onWorkflowItemChanged5";
             // 
             // SetCT_Oferta1
@@ -1188,9 +1277,9 @@ namespace KontraktSMW.Workflow1
             // 
             // setState_KorektaOferty
             // 
-            correlationtoken17.Name = "myWorkflowToken";
-            correlationtoken17.OwnerActivityName = "Workflow1";
-            this.setState_KorektaOferty.CorrelationToken = correlationtoken17;
+            correlationtoken18.Name = "myWorkflowToken";
+            correlationtoken18.OwnerActivityName = "Workflow1";
+            this.setState_KorektaOferty.CorrelationToken = correlationtoken18;
             this.setState_KorektaOferty.Name = "setState_KorektaOferty";
             this.setState_KorektaOferty.State = 20;
             // 
@@ -1216,9 +1305,7 @@ namespace KontraktSMW.Workflow1
             // 
             this.onWorkflowItemChanged4.AfterProperties = null;
             this.onWorkflowItemChanged4.BeforeProperties = null;
-            correlationtoken18.Name = "myWorkflowToken";
-            correlationtoken18.OwnerActivityName = "Workflow1";
-            this.onWorkflowItemChanged4.CorrelationToken = correlationtoken18;
+            this.onWorkflowItemChanged4.CorrelationToken = correlationtoken3;
             this.onWorkflowItemChanged4.Name = "onWorkflowItemChanged4";
             // 
             // SetCT_AkceptacjaOferty
@@ -1254,10 +1341,29 @@ namespace KontraktSMW.Workflow1
             this.SetCT_Odrzucony.Name = "SetCT_Odrzucony";
             this.SetCT_Odrzucony.ExecuteCode += new System.EventHandler(this.SetCT_Odrzucony_ExecuteCode);
             // 
-            // Komunikat_Odrzucony
+            // sendEmail_Stracony
             // 
-            this.Komunikat_Odrzucony.Enabled = false;
-            this.Komunikat_Odrzucony.Name = "Komunikat_Odrzucony";
+            activitybind14.Name = "Workflow1";
+            activitybind14.Path = "Mail_BCC";
+            activitybind15.Name = "Workflow1";
+            activitybind15.Path = "Mail_Body";
+            this.sendEmail_Stracony.CC = null;
+            correlationtoken20.Name = "myWorkflowToken";
+            correlationtoken20.OwnerActivityName = "Workflow1";
+            this.sendEmail_Stracony.CorrelationToken = correlationtoken20;
+            this.sendEmail_Stracony.From = null;
+            this.sendEmail_Stracony.Headers = null;
+            this.sendEmail_Stracony.IncludeStatus = false;
+            this.sendEmail_Stracony.Name = "sendEmail_Stracony";
+            activitybind16.Name = "Workflow1";
+            activitybind16.Path = "Mail_Subject";
+            activitybind17.Name = "Workflow1";
+            activitybind17.Path = "Mail_To";
+            this.sendEmail_Stracony.MethodInvoking += new System.EventHandler(this.sendEmail_Stracony_MethodInvoking);
+            this.sendEmail_Stracony.SetBinding(Microsoft.SharePoint.WorkflowActions.SendEmail.ToProperty, ((System.Workflow.ComponentModel.ActivityBind)(activitybind17)));
+            this.sendEmail_Stracony.SetBinding(Microsoft.SharePoint.WorkflowActions.SendEmail.SubjectProperty, ((System.Workflow.ComponentModel.ActivityBind)(activitybind16)));
+            this.sendEmail_Stracony.SetBinding(Microsoft.SharePoint.WorkflowActions.SendEmail.BodyProperty, ((System.Workflow.ComponentModel.ActivityBind)(activitybind15)));
+            this.sendEmail_Stracony.SetBinding(Microsoft.SharePoint.WorkflowActions.SendEmail.BCCProperty, ((System.Workflow.ComponentModel.ActivityBind)(activitybind14)));
             // 
             // logToHistoryListActivity2
             // 
@@ -1271,8 +1377,6 @@ namespace KontraktSMW.Workflow1
             // 
             // setState_Odrzucony
             // 
-            correlationtoken20.Name = "myWorkflowToken";
-            correlationtoken20.OwnerActivityName = "Workflow1";
             this.setState_Odrzucony.CorrelationToken = correlationtoken20;
             this.setState_Odrzucony.Name = "setState_Odrzucony";
             this.setState_Odrzucony.State = 16;
@@ -1465,9 +1569,9 @@ namespace KontraktSMW.Workflow1
             this.onWorkflowActivated1.CorrelationToken = correlationtoken27;
             this.onWorkflowActivated1.EventName = "OnWorkflowActivated";
             this.onWorkflowActivated1.Name = "onWorkflowActivated1";
-            activitybind2.Name = "Workflow1";
-            activitybind2.Path = "workflowProperties";
-            this.onWorkflowActivated1.SetBinding(Microsoft.SharePoint.WorkflowActions.OnWorkflowActivated.WorkflowPropertiesProperty, ((System.Workflow.ComponentModel.ActivityBind)(activitybind2)));
+            activitybind18.Name = "Workflow1";
+            activitybind18.Path = "workflowProperties";
+            this.onWorkflowActivated1.SetBinding(Microsoft.SharePoint.WorkflowActions.OnWorkflowActivated.WorkflowPropertiesProperty, ((System.Workflow.ComponentModel.ActivityBind)(activitybind18)));
             // 
             // stateInitializationActivity12
             // 
@@ -1601,7 +1705,7 @@ namespace KontraktSMW.Workflow1
             // 
             this.stateInitializationActivity2.Activities.Add(this.setState_Odrzucony);
             this.stateInitializationActivity2.Activities.Add(this.logToHistoryListActivity2);
-            this.stateInitializationActivity2.Activities.Add(this.Komunikat_Odrzucony);
+            this.stateInitializationActivity2.Activities.Add(this.sendEmail_Stracony);
             this.stateInitializationActivity2.Activities.Add(this.SetCT_Odrzucony);
             this.stateInitializationActivity2.Activities.Add(this.setStateActivity26);
             this.stateInitializationActivity2.Name = "stateInitializationActivity2";
@@ -1788,6 +1892,14 @@ namespace KontraktSMW.Workflow1
         }
 
         #endregion
+
+        private Microsoft.SharePoint.WorkflowActions.SendEmail sendEmail_WniosekZaakceptowany;
+
+        private Microsoft.SharePoint.WorkflowActions.SendEmail sendEmail_OfertaZaakceptowana;
+
+        private Microsoft.SharePoint.WorkflowActions.SendEmail sendEmail_UmowaZaakceptowana;
+
+        private Microsoft.SharePoint.WorkflowActions.SendEmail sendEmail_Stracony;
 
         private CodeActivity codeActivity1;
 
@@ -2135,8 +2247,6 @@ namespace KontraktSMW.Workflow1
 
         private CodeActivity SetCT_Odrzucony;
 
-        private CodeActivity Komunikat_Odrzucony;
-
         private Microsoft.SharePoint.WorkflowActions.LogToHistoryListActivity logToHistoryListActivity2;
 
         private Microsoft.SharePoint.WorkflowActions.SetState setState_Odrzucony;
@@ -2220,6 +2330,42 @@ namespace KontraktSMW.Workflow1
         private StateActivity Navigator;
 
         private StateActivity Start;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -16,6 +16,8 @@ using Microsoft.SharePoint.Workflow;
 using Microsoft.SharePoint.WorkflowActions;
 using System.Text;
 using System.Net.Mail;
+using System.Collections.Specialized;
+using Microsoft.SharePoint.Utilities;
 
 namespace KontraktSMW.Workflow1
 {
@@ -38,7 +40,8 @@ namespace KontraktSMW.Workflow1
         public SPWorkflowActivationProperties workflowProperties = new SPWorkflowActivationProperties();
 
         public String logRozliczenie_DodajDoRozliczen = default(System.String);
-        //public Komunikat message = new Komunikat();
+
+
 
         #region Warunki logiczne Navigatora
 
@@ -517,6 +520,102 @@ namespace KontraktSMW.Workflow1
 
         #endregion
 
+        #region Helpers
+
+        public bool SendDirectMail(string subject, string body)
+        {
+            //Ustaw dla każdego modułu indywidualnie
+            string from = "ERR.ML.ObslugaKontraktu<noreply@stafix24.pl>";
+            string to = "biuro@rawcom24.pl";
+
+
+            //TurboSMTP config parameters
+            const string sMTPServerName = "pro.turbo-smtp.com";//
+            const string sMTPLoginName = "biuro@rawcom24.pl";
+            const string sMTPPassword = "Rogalaewa1";
+            const int sMTPPort = 587;
+
+            MailMessage msg = new MailMessage(from, to);
+            msg.Subject = subject;
+            msg.Body = body;
+            msg.BodyEncoding = Encoding.UTF8;
+            msg.IsBodyHtml = true;
+
+            SmtpClient client = new SmtpClient(sMTPServerName, sMTPPort);
+            System.Net.NetworkCredential basicCredential = new System.Net.NetworkCredential(sMTPLoginName, sMTPPassword);
+            client.EnableSsl = false;
+            client.UseDefaultCredentials = true;
+            client.Credentials = basicCredential;
+            try
+            {
+                client.Send(msg);
+            }
+            catch (Exception)
+            {
+                WriteToHistoryLog("DirectSendMail", "ERR");
+                return false;
+            }
+
+            return true;
+        }
+
+        private void CustomErrorHandler(Exception e)
+        {
+
+            StringBuilder sb = new StringBuilder();
+
+            try
+            {
+                sb.AppendFormat(@"<table><tr><td>{0}</td><td>{1}</td></tr></table>", "Message", e.Message.ToString());
+                sb.AppendFormat(@"<table><tr><td>{0}</td><td>{1}</td></tr></table>", "Source", e.Source.ToString());
+                sb.AppendFormat(@"<table><tr><td>{0}</td><td>{1}</td></tr></table>", "Target Site", e.TargetSite.ToString());
+                sb.AppendFormat(@"<table><tr><td>{0}</td><td>{1}</td></tr></table>", "Stack Trace", e.StackTrace.ToString());
+                sb.AppendFormat(@"<table><tr><td>{0}</td><td>{1}</td></tr></table>", "Workflow Context", workflowProperties.Context.ToString());
+
+            }
+            catch (Exception)
+            {
+                sb.AppendLine("Problem z odczytem pozostałych szczegółów");
+            }
+
+            WriteToHistoryLog(e.Message.ToString(), "ERR");
+
+            SendDirectMail(e.Message.ToString(), sb.ToString());
+
+        }
+
+        private void WriteToHistoryLog(string description, string outcome)
+        {
+            SPWeb web = workflowProperties.Web;
+            Guid workflow = workflowProperties.WorkflowId;
+
+            TimeSpan ts = new TimeSpan();
+            SPWorkflow.CreateHistoryEvent(web, workflow, 0, web.CurrentUser, ts,
+                outcome, description, string.Empty);
+        }
+
+        private void ReportError(string Message, string Outcome, Exception e, bool allowSendDirectMail)
+        {
+            //report to history log
+
+            if (Message == string.Empty)
+            {
+                Message = e.Message;
+            }
+
+            WriteToHistoryLog(Message, Outcome);
+
+            //report to email
+
+            if (allowSendDirectMail)
+            {
+                SendDirectMail(Message, e.ToString());
+            }
+        }
+
+        #endregion
+
+
         #region Komunikaty
 
         private void Komunikat_Odrzucony_ExecuteCode(object sender, EventArgs e)
@@ -605,77 +704,69 @@ namespace KontraktSMW.Workflow1
 
         #region Komunikaty.Procedury
 
-        private bool IsKomunikatUpdated()
+        private void KomunikatDlaAgenta(string coreMessage)
         {
-            return false;
+            WriteToHistoryLog("Komunikat dla agenta", coreMessage);
 
-            //try
-            //{
-            //    if (workflowProperties.Item["colDataZgloszenia"] != null)
-            //    {
-            //        message.DataZgloszenia = Convert.ToDateTime(workflowProperties.Item["colDataZgloszenia"]);
-            //    }
+            DateTime datDataZgloszenia = new DateTime();
+            string strKlient = string.Empty;
+            string strWartoscPLN = string.Empty;
+            string strCelFinansowania = string.Empty;
+            string strUstalenia = string.Empty;
+            string strStatusLeadu = string.Empty;
 
-            //    if (workflowProperties.Item["colKlient"] != null)
-            //    {
-            //        message.Klient = workflowProperties.Item["colKlient"].ToString();
-            //    }
-            //    else
-            //    {
-            //        message.Klient = string.Empty;
-            //    }
+            string strTo;
+            string strCC;
+            string strSubject = string.Empty;
+            string strBody = string.Empty;
 
-            //    if (workflowProperties.Item["colWartoscPLN"] != null)
-            //    {
-            //        SPFieldCurrency price = (SPFieldCurrency)workflowProperties.Item["colWartoscPLN"];
+            //odczyt danych z kontraktu
 
-            //        message.WartoscPLN = price.GetFieldValueAsText(workflowProperties.Item["colWartoscPLN"]);
-            //    }
-            //    else
-            //    {
-            //        message.WartoscPLN = String.Empty;
-            //    }
+            try
+            {
+                if (workflowProperties.Item["colDataZgloszenia"] != null)
+                {
+                    datDataZgloszenia = Convert.ToDateTime(workflowProperties.Item["colDataZgloszenia"]);
+                }
 
-            //    if (workflowProperties.Item["colCelFinansowania"] != null)
-            //    {
-            //        message.CelFinansowania = (string)workflowProperties.Item["colCelFinansowania"];
-            //    }
-            //    else
-            //    {
-            //        message.CelFinansowania = string.Empty;
-            //    }
-
-            //    if (workflowProperties.Item["colUstalenia"] != null)
-            //    {
-            //        message.Ustalenia = workflowProperties.Item["colUstalenia"].ToString();
-            //    }
-            //    else
-            //    {
-            //        message.Ustalenia = string.Empty;
-            //    }
-
-            //    if (workflowProperties.Item["colStatusLeadu"] != null)
-            //    {
-            //        message.StatusLeadu = workflowProperties.Item["colStatusLeadu"].ToString();
-            //    }
-            //    else
-            //    {
-            //        message.StatusLeadu = String.Empty;
-            //    }
+                if (workflowProperties.Item["colKlient"] != null)
+                {
+                    strKlient = workflowProperties.Item["colKlient"].ToString();
+                }
 
 
-            //    return true;
-            //}
-            //catch (Exception exp)
-            //{
-            //    throw;
-            //}
+                if (workflowProperties.Item["colWartoscPLN"] != null)
+                {
+                    SPFieldCurrency price = (SPFieldCurrency)workflowProperties.Item["colWartoscPLN"];
 
-            //return false;
-        }
+                    strWartoscPLN = price.GetFieldValueAsText(workflowProperties.Item["colWartoscPLN"]);
+                }
 
-        private void KomunikatDlaAgenta(string tematWiadomosci, string trescWiadomosci)
-        {
+
+                if (workflowProperties.Item["colCelFinansowania"] != null)
+                {
+                    strCelFinansowania = (string)workflowProperties.Item["colCelFinansowania"];
+                }
+
+
+                if (workflowProperties.Item["colUstalenia"] != null)
+                {
+                    strUstalenia = workflowProperties.Item["colUstalenia"].ToString();
+                }
+
+
+                if (workflowProperties.Item["colStatusLeadu"] != null)
+                {
+                    strStatusLeadu = workflowProperties.Item["colStatusLeadu"].ToString();
+                }
+
+            }
+            catch (Exception exp)
+            {
+                ReportError("Odczyt danych z kontraktu", "ERR", exp, true);
+                return;
+            }
+
             //znajdź identyfikator kartoteki agenta
 
             int partnerID = 0;
@@ -689,6 +780,9 @@ namespace KontraktSMW.Workflow1
 
                 partnerID = Convert.ToInt32(idPure);
                 emailAgenta = GetEmailAgenta(partnerID);
+
+                WriteToHistoryLog("ID kartoteki Agenta", partnerID.ToString());
+                WriteToHistoryLog("eMail agenta", emailAgenta);
             }
 
 
@@ -697,27 +791,73 @@ namespace KontraktSMW.Workflow1
                 emailAgenta != string.Empty &&
                 IsSubskrybcjaWiadomociAktywna(partnerID))
             {
-                using (SPSite site = new SPSite(workflowProperties.SiteId))
-                {
+                //przygotuj wiadomość
 
-                    using (SPWeb web = site.AllWebs[workflowProperties.WebId])
-                    {
-                        SPList list = web.Lists["tabKolejkaWiadomosciEmail"];
+                WriteToHistoryLog("Przygotowanie wiadomości", "");
 
-                        SPListItem item = list.AddItem();
+                strSubject = string.Format("#{0}:{1}:{2} :: {3}",
+                                    workflowProperties.ItemId.ToString(),
+                                    strKlient,
+                                    datDataZgloszenia.ToShortDateString(),
+                                    coreMessage);
 
-                        item["colDataPlanowanejWysylki"] = DateTime.Now;
-                        item["colEmailOdbiorcyWiadomosci"] = emailAgenta.ToString();
-                        //item["colEmailOdbiorcyKopiiWiadomosci"] =
-                        //item["colEmailNadawcyWiadomosci"] =
-                        item["colTematWiadomosci"] = tematWiadomosci.ToString();
-                        item["colTrescWiadomosci"] = trescWiadomosci.ToString();
-                        //item["colBodyHTML"] =
-                        //item["colStopkaWiadomosciHTML"] =
-                        item.Update();
+                StringBuilder sb = new StringBuilder();
+                sb.AppendFormat("<h2>Szczegóły kontraktu:<h2>");
+                sb.AppendFormat("<ul>");
+                sb.AppendFormat("<li>{0}:{1}</li>", "Klient", strKlient);
+                sb.AppendFormat("<li>{0}:{1}</li>", "Data Zgłoszenia", datDataZgloszenia.ToShortDateString());
+                sb.AppendFormat("<li>{0}:{1}</li>", "Wartość PLN", strWartoscPLN);
+                sb.AppendFormat("<li>{0}:{1}</li>", "Cel Finansowania", strCelFinansowania.ToString());
+                sb.AppendFormat("<li>{0}:{1}</li>", "Ustalenia", strUstalenia);
+                sb.AppendFormat("<li>{0}:{1}</li>", "Status", strStatusLeadu);
+                sb.AppendFormat("</ul>");
 
-                    }
-                }
+                strBody = sb.ToString();
+
+                ResetMailConfig();
+
+                Mail_To = emailAgenta.ToString();
+                Mail_BCC = "biuro@rawcom24.pl";
+                //Mail_From = "noreply@stafix24.pl";
+                Mail_Subject = strSubject;
+                Mail_Body = strBody;
+
+                //WriteToHistoryLog("wysłane", "");
+
+                //mailObject.To = 
+                //mailObject.CC = "biuro@rawcom24.pl";
+                //mailObject.Subject = strSubject;
+                //mailObject.Body = strBody;
+
+                //WriteToHistoryLog("Wiadomość wysłana", "");
+
+                //using (SPSite site = new SPSite(workflowProperties.SiteId))
+                //{
+
+                //    using (SPWeb web = site.AllWebs[workflowProperties.WebId])
+                //    {
+                //        SPList list = web.Lists["tabKolejkaWiadomosciEmail"];
+
+                //        SPListItem item = list.AddItem();
+
+                //        item["colDataPlanowanejWysylki"] = DateTime.Now;
+                //        item["colEmailOdbiorcyWiadomosci"] = emailAgenta.ToString();
+                //        //item["colEmailOdbiorcyKopiiWiadomosci"] =
+                //        //item["colEmailNadawcyWiadomosci"] =
+                //        item["colTematWiadomosci"] = strSubject;
+                //        item["colTrescWiadomosci"] = strBody;
+                //        //item["colBodyHTML"] =
+                //        //item["colStopkaWiadomosciHTML"] =
+                //        item.Update();
+
+                //        WriteToHistoryLog("Wiadomość wysłana", "");
+
+                //    }
+                //}
+            }
+            else
+            {
+                WriteToHistoryLog("Wiadomość wstrzymana, brak email lub nieaktywna subskrybcja", "");
             }
         }
 
@@ -789,87 +929,47 @@ namespace KontraktSMW.Workflow1
 
         #endregion
 
-        #region Helpers
-
-        public bool SendDirectMail(string subject, string body)
-        {
-            //Ustaw dla każdego modułu indywidualnie
-            string from = "ERR.ML.ObslugaKontraktu<noreply@stafix24.pl>";
-            string to = "biuro@rawcom24.pl";
-
-
-            //TurboSMTP config parameters
-            const string sMTPServerName = "pro.turbo-smtp.com";//
-            const string sMTPLoginName = "biuro@rawcom24.pl";
-            const string sMTPPassword = "Rogalaewa1";
-            const int sMTPPort = 587;
-
-            MailMessage msg = new MailMessage(from, to);
-            msg.Subject = subject;
-            msg.Body = body;
-            msg.BodyEncoding = Encoding.UTF8;
-            msg.IsBodyHtml = true;
-
-            SmtpClient client = new SmtpClient(sMTPServerName, sMTPPort);
-            System.Net.NetworkCredential basicCredential = new System.Net.NetworkCredential(sMTPLoginName, sMTPPassword);
-            client.EnableSsl = false;
-            client.UseDefaultCredentials = true;
-            client.Credentials = basicCredential;
-            try
-            {
-                client.Send(msg);
-            }
-            catch (Exception)
-            {
-                WriteToHistoryLog("DirectSendMail", "ERR");
-                return false;
-            }
-
-            return true;
-        }
-
-        private void CustomErrorHandler(Exception e)
-        {
-
-            StringBuilder sb = new StringBuilder();
-
-            try
-            {
-                sb.AppendFormat(@"<table><tr><td>{0}</td><td>{1}</td></tr></table>", "Message", e.Message.ToString());
-                sb.AppendFormat(@"<table><tr><td>{0}</td><td>{1}</td></tr></table>", "Source", e.Source.ToString());
-                sb.AppendFormat(@"<table><tr><td>{0}</td><td>{1}</td></tr></table>", "Target Site", e.TargetSite.ToString());
-                sb.AppendFormat(@"<table><tr><td>{0}</td><td>{1}</td></tr></table>", "Stack Trace", e.StackTrace.ToString());
-                sb.AppendFormat(@"<table><tr><td>{0}</td><td>{1}</td></tr></table>", "Workflow Context", workflowProperties.Context.ToString());
-
-            }
-            catch (Exception)
-            {
-                sb.AppendLine("Problem z odczytem pozostałych szczegółów");
-            }
-
-            WriteToHistoryLog(e.Message.ToString(), "ERR");
-
-            SendDirectMail(e.Message.ToString(), sb.ToString());
-
-        }
-
-        private void WriteToHistoryLog(string description, string outcome)
-        {
-            SPWeb web = workflowProperties.Web;
-            Guid workflow = workflowProperties.WorkflowId;
-
-            TimeSpan ts = new TimeSpan();
-            SPWorkflow.CreateHistoryEvent(web, workflow, 0, web.CurrentUser, ts,
-                outcome, description, string.Empty);
-        }
-
-        #endregion
-
         private void codeActivity1_ExecuteCode(object sender, EventArgs e)
         {
-            WriteToHistoryLog("to jest opis testowy", "TEST");
-            SendDirectMail("To jest przykłądowy tytuł", "to jest przykładowa treść");
+
         }
 
+        private void sendEmail_Stracony_MethodInvoking(object sender, EventArgs e)
+        {
+            KomunikatDlaAgenta("stracony");
+        }
+
+        private void sendEmailZarejestrowany_MethodInvoking(object sender, EventArgs e)
+        {
+            KomunikatDlaAgenta("zarejestrowany");
+        }
+
+        public String Mail_To = default(System.String);
+        public String Mail_CC = default(System.String);
+        public String Mail_Body = default(System.String);
+        public String Mail_BCC = default(System.String);
+        public String Mail_From = default(System.String);
+        public String Mail_Subject = default(System.String);
+
+        public void ResetMailConfig()
+        {
+            Mail_To = default(System.String);
+            Mail_CC = default(System.String);
+            Mail_Body = default(System.String);
+            Mail_BCC = default(System.String);
+            Mail_From = default(System.String);
+            Mail_Subject = default(System.String);
+        }
+
+        private void sendEmail_UmowaZaakceptowana_MethodInvoking(object sender, EventArgs e)
+        {
+            KomunikatDlaAgenta("umowa zaakceptowana");
+        }
+
+        private void sendEmail_OfertaZaakceptowana_MethodInvoking(object sender, EventArgs e)
+        {
+            KomunikatDlaAgenta("oferta zaakceptowana");
+        }
     }
+
 }
