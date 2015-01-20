@@ -32,6 +32,8 @@ namespace KontraktSMW.Workflow1
         const string _STRACONY_ = "Stracony";
         const string _URUCHOMIONY_ = "Uruchomiony";
 
+        const string _DEFAULT_EMAIL_SENDER_ = "Master Leasing<noreply@stafix24.pl>";
+
         public Workflow1()
         {
             InitializeComponent();
@@ -735,12 +737,15 @@ namespace KontraktSMW.Workflow1
                 }
 
 
-                if (workflowProperties.Item["colWartoscPLN"] != null)
+                try
                 {
-                    SPFieldCurrency price = (SPFieldCurrency)workflowProperties.Item["colWartoscPLN"];
-
-                    strWartoscPLN = price.GetFieldValueAsText(workflowProperties.Item["colWartoscPLN"]);
+                    if (workflowProperties.Item["colWartoscKontraktuPLN"] != null)
+                    {
+                        strWartoscPLN = workflowProperties.Item["colWartoscKontraktuPLN"].ToString();
+                    }
                 }
+                catch (Exception)
+                {}
 
 
                 if (workflowProperties.Item["colCelFinansowania"] != null)
@@ -795,21 +800,22 @@ namespace KontraktSMW.Workflow1
 
                 WriteToHistoryLog("Przygotowanie wiadomości", "");
 
-                strSubject = string.Format("#{0}:{1}:{2} :: {3}",
+                strSubject = string.Format("#{0}:{1}:{2}:{3} :: {4}",
                                     workflowProperties.ItemId.ToString(),
                                     strKlient,
                                     datDataZgloszenia.ToShortDateString(),
+                                    strWartoscPLN,
                                     coreMessage);
-
+             
                 StringBuilder sb = new StringBuilder();
-                sb.AppendFormat("<h2>Szczegóły kontraktu:<h2>");
+                sb.AppendFormat("<p>Szczegóły kontraktu:</p>");
                 sb.AppendFormat("<ul>");
-                sb.AppendFormat("<li>{0}:{1}</li>", "Klient", strKlient);
-                sb.AppendFormat("<li>{0}:{1}</li>", "Data Zgłoszenia", datDataZgloszenia.ToShortDateString());
-                sb.AppendFormat("<li>{0}:{1}</li>", "Wartość PLN", strWartoscPLN);
-                sb.AppendFormat("<li>{0}:{1}</li>", "Cel Finansowania", strCelFinansowania.ToString());
-                sb.AppendFormat("<li>{0}:{1}</li>", "Ustalenia", strUstalenia);
-                sb.AppendFormat("<li>{0}:{1}</li>", "Status", strStatusLeadu);
+                sb.AppendFormat("<li>{0}: {1}</li>", "Klient", strKlient);
+                sb.AppendFormat("<li>{0}: {1}</li>", "Data Zgłoszenia", datDataZgloszenia.ToShortDateString());
+                sb.AppendFormat("<li>{0}: {1}</li>", "Wartość PLN", strWartoscPLN);
+                sb.AppendFormat("<li>{0}: {1}</li>", "Cel Finansowania", strCelFinansowania.ToString());
+                sb.AppendFormat("<li>{0}: {1}</li>", "Ustalenia", strUstalenia);
+                sb.AppendFormat("<li>{0}: {1}</li>", "Status", strStatusLeadu);
                 sb.AppendFormat("</ul>");
 
                 strBody = sb.ToString();
@@ -818,7 +824,7 @@ namespace KontraktSMW.Workflow1
 
                 Mail_To = emailAgenta.ToString();
                 Mail_BCC = "biuro@rawcom24.pl";
-                //Mail_From = "noreply@stafix24.pl";
+                Mail_From = _DEFAULT_EMAIL_SENDER_;
                 Mail_Subject = strSubject;
                 Mail_Body = strBody;
 
@@ -969,6 +975,19 @@ namespace KontraktSMW.Workflow1
         private void sendEmail_OfertaZaakceptowana_MethodInvoking(object sender, EventArgs e)
         {
             KomunikatDlaAgenta("oferta zaakceptowana");
+        }
+
+        private void codeSetup_ExecuteCode(object sender, EventArgs e)
+        {
+            try
+            {
+                workflowProperties.Item["colNumerKontraktu"] = String.Format("K.{0}", workflowProperties.ItemId.ToString());
+                workflowProperties.Item["Title"] = ".";
+                workflowProperties.Item.Update();
+            }
+            catch (Exception)
+            {
+            }
         }
     }
 

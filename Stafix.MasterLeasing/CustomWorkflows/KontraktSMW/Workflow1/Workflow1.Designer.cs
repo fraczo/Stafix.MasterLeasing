@@ -28,19 +28,25 @@ namespace KontraktSMW.Workflow1
             this.CanModifyActivities = true;
             System.Workflow.ComponentModel.ActivityBind activitybind1 = new System.Workflow.ComponentModel.ActivityBind();
             System.Workflow.ComponentModel.ActivityBind activitybind2 = new System.Workflow.ComponentModel.ActivityBind();
-            System.Workflow.Runtime.CorrelationToken correlationtoken1 = new System.Workflow.Runtime.CorrelationToken();
             System.Workflow.ComponentModel.ActivityBind activitybind3 = new System.Workflow.ComponentModel.ActivityBind();
+            System.Workflow.Runtime.CorrelationToken correlationtoken1 = new System.Workflow.Runtime.CorrelationToken();
             System.Workflow.ComponentModel.ActivityBind activitybind4 = new System.Workflow.ComponentModel.ActivityBind();
             System.Workflow.ComponentModel.ActivityBind activitybind5 = new System.Workflow.ComponentModel.ActivityBind();
             System.Workflow.ComponentModel.ActivityBind activitybind6 = new System.Workflow.ComponentModel.ActivityBind();
-            System.Workflow.Runtime.CorrelationToken correlationtoken2 = new System.Workflow.Runtime.CorrelationToken();
             System.Workflow.ComponentModel.ActivityBind activitybind7 = new System.Workflow.ComponentModel.ActivityBind();
             System.Workflow.ComponentModel.ActivityBind activitybind8 = new System.Workflow.ComponentModel.ActivityBind();
             System.Workflow.ComponentModel.ActivityBind activitybind9 = new System.Workflow.ComponentModel.ActivityBind();
+            System.Workflow.Runtime.CorrelationToken correlationtoken2 = new System.Workflow.Runtime.CorrelationToken();
             System.Workflow.ComponentModel.ActivityBind activitybind10 = new System.Workflow.ComponentModel.ActivityBind();
-            System.Workflow.Runtime.CorrelationToken correlationtoken3 = new System.Workflow.Runtime.CorrelationToken();
             System.Workflow.ComponentModel.ActivityBind activitybind11 = new System.Workflow.ComponentModel.ActivityBind();
             System.Workflow.ComponentModel.ActivityBind activitybind12 = new System.Workflow.ComponentModel.ActivityBind();
+            System.Workflow.ComponentModel.ActivityBind activitybind13 = new System.Workflow.ComponentModel.ActivityBind();
+            System.Workflow.ComponentModel.ActivityBind activitybind14 = new System.Workflow.ComponentModel.ActivityBind();
+            System.Workflow.ComponentModel.ActivityBind activitybind15 = new System.Workflow.ComponentModel.ActivityBind();
+            System.Workflow.Runtime.CorrelationToken correlationtoken3 = new System.Workflow.Runtime.CorrelationToken();
+            System.Workflow.ComponentModel.ActivityBind activitybind16 = new System.Workflow.ComponentModel.ActivityBind();
+            System.Workflow.ComponentModel.ActivityBind activitybind17 = new System.Workflow.ComponentModel.ActivityBind();
+            System.Workflow.ComponentModel.ActivityBind activitybind18 = new System.Workflow.ComponentModel.ActivityBind();
             System.Workflow.Activities.CodeCondition codecondition1 = new System.Workflow.Activities.CodeCondition();
             System.Workflow.Activities.CodeCondition codecondition2 = new System.Workflow.Activities.CodeCondition();
             System.Workflow.Activities.CodeCondition codecondition3 = new System.Workflow.Activities.CodeCondition();
@@ -70,7 +76,7 @@ namespace KontraktSMW.Workflow1
             System.Workflow.Activities.CodeCondition codecondition27 = new System.Workflow.Activities.CodeCondition();
             System.Workflow.Activities.CodeCondition codecondition28 = new System.Workflow.Activities.CodeCondition();
             System.Workflow.Activities.CodeCondition codecondition29 = new System.Workflow.Activities.CodeCondition();
-            System.Workflow.ComponentModel.ActivityBind activitybind13 = new System.Workflow.ComponentModel.ActivityBind();
+            System.Workflow.ComponentModel.ActivityBind activitybind19 = new System.Workflow.ComponentModel.ActivityBind();
             System.Workflow.Runtime.CorrelationToken correlationtoken4 = new System.Workflow.Runtime.CorrelationToken();
             System.Workflow.Runtime.CorrelationToken correlationtoken5 = new System.Workflow.Runtime.CorrelationToken();
             System.Workflow.Runtime.CorrelationToken correlationtoken6 = new System.Workflow.Runtime.CorrelationToken();
@@ -87,11 +93,13 @@ namespace KontraktSMW.Workflow1
             System.Workflow.Runtime.CorrelationToken correlationtoken17 = new System.Workflow.Runtime.CorrelationToken();
             System.Workflow.Runtime.CorrelationToken correlationtoken18 = new System.Workflow.Runtime.CorrelationToken();
             System.Workflow.Runtime.CorrelationToken correlationtoken19 = new System.Workflow.Runtime.CorrelationToken();
-            System.Workflow.ComponentModel.ActivityBind activitybind14 = new System.Workflow.ComponentModel.ActivityBind();
-            System.Workflow.ComponentModel.ActivityBind activitybind15 = new System.Workflow.ComponentModel.ActivityBind();
+            System.Workflow.ComponentModel.ActivityBind activitybind20 = new System.Workflow.ComponentModel.ActivityBind();
+            System.Workflow.ComponentModel.ActivityBind activitybind21 = new System.Workflow.ComponentModel.ActivityBind();
+            System.Workflow.ComponentModel.ActivityBind activitybind22 = new System.Workflow.ComponentModel.ActivityBind();
             System.Workflow.Runtime.CorrelationToken correlationtoken20 = new System.Workflow.Runtime.CorrelationToken();
-            System.Workflow.ComponentModel.ActivityBind activitybind16 = new System.Workflow.ComponentModel.ActivityBind();
-            System.Workflow.ComponentModel.ActivityBind activitybind17 = new System.Workflow.ComponentModel.ActivityBind();
+            System.Workflow.ComponentModel.ActivityBind activitybind23 = new System.Workflow.ComponentModel.ActivityBind();
+            System.Workflow.ComponentModel.ActivityBind activitybind24 = new System.Workflow.ComponentModel.ActivityBind();
+            System.Workflow.ComponentModel.ActivityBind activitybind25 = new System.Workflow.ComponentModel.ActivityBind();
             System.Workflow.Runtime.CorrelationToken correlationtoken21 = new System.Workflow.Runtime.CorrelationToken();
             System.Workflow.Runtime.CorrelationToken correlationtoken22 = new System.Workflow.Runtime.CorrelationToken();
             System.Workflow.Runtime.CorrelationToken correlationtoken23 = new System.Workflow.Runtime.CorrelationToken();
@@ -99,7 +107,7 @@ namespace KontraktSMW.Workflow1
             System.Workflow.Runtime.CorrelationToken correlationtoken25 = new System.Workflow.Runtime.CorrelationToken();
             System.Workflow.Runtime.CorrelationToken correlationtoken26 = new System.Workflow.Runtime.CorrelationToken();
             System.Workflow.Runtime.CorrelationToken correlationtoken27 = new System.Workflow.Runtime.CorrelationToken();
-            System.Workflow.ComponentModel.ActivityBind activitybind18 = new System.Workflow.ComponentModel.ActivityBind();
+            System.Workflow.ComponentModel.ActivityBind activitybind26 = new System.Workflow.ComponentModel.ActivityBind();
             this.logToHistoryListActivity4 = new Microsoft.SharePoint.WorkflowActions.LogToHistoryListActivity();
             this.setStateActivity21 = new System.Workflow.Activities.SetStateActivity();
             this.setStateActivity22 = new System.Workflow.Activities.SetStateActivity();
@@ -272,6 +280,7 @@ namespace KontraktSMW.Workflow1
             this.faultHandlersActivity1 = new System.Workflow.ComponentModel.FaultHandlersActivity();
             this.setStateActivity1 = new System.Workflow.Activities.SetStateActivity();
             this.StatusLead_Rozmowa = new System.Workflow.Activities.CodeActivity();
+            this.codeSetup = new System.Workflow.Activities.CodeActivity();
             this.logZainicjowany = new Microsoft.SharePoint.WorkflowActions.LogToHistoryListActivity();
             this.onWorkflowActivated1 = new Microsoft.SharePoint.WorkflowActions.OnWorkflowActivated();
             this.stateInitializationActivity12 = new System.Workflow.Activities.StateInitializationActivity();
@@ -388,23 +397,27 @@ namespace KontraktSMW.Workflow1
             activitybind1.Path = "Mail_BCC";
             activitybind2.Name = "Workflow1";
             activitybind2.Path = "Mail_Body";
-            this.sendEmail_UmowaZaakceptowana.CC = null;
+            activitybind3.Name = "Workflow1";
+            activitybind3.Path = "Mail_CC";
             correlationtoken1.Name = "myWorkflowToken";
             correlationtoken1.OwnerActivityName = "Workflow1";
             this.sendEmail_UmowaZaakceptowana.CorrelationToken = correlationtoken1;
-            this.sendEmail_UmowaZaakceptowana.From = null;
+            activitybind4.Name = "Workflow1";
+            activitybind4.Path = "Mail_From";
             this.sendEmail_UmowaZaakceptowana.Headers = null;
             this.sendEmail_UmowaZaakceptowana.IncludeStatus = false;
             this.sendEmail_UmowaZaakceptowana.Name = "sendEmail_UmowaZaakceptowana";
-            activitybind3.Name = "Workflow1";
-            activitybind3.Path = "Mail_Subject";
-            activitybind4.Name = "Workflow1";
-            activitybind4.Path = "Mail_To";
+            activitybind5.Name = "Workflow1";
+            activitybind5.Path = "Mail_Subject";
+            activitybind6.Name = "Workflow1";
+            activitybind6.Path = "Mail_To";
             this.sendEmail_UmowaZaakceptowana.MethodInvoking += new System.EventHandler(this.sendEmail_UmowaZaakceptowana_MethodInvoking);
             this.sendEmail_UmowaZaakceptowana.SetBinding(Microsoft.SharePoint.WorkflowActions.SendEmail.BCCProperty, ((System.Workflow.ComponentModel.ActivityBind)(activitybind1)));
             this.sendEmail_UmowaZaakceptowana.SetBinding(Microsoft.SharePoint.WorkflowActions.SendEmail.BodyProperty, ((System.Workflow.ComponentModel.ActivityBind)(activitybind2)));
-            this.sendEmail_UmowaZaakceptowana.SetBinding(Microsoft.SharePoint.WorkflowActions.SendEmail.SubjectProperty, ((System.Workflow.ComponentModel.ActivityBind)(activitybind3)));
-            this.sendEmail_UmowaZaakceptowana.SetBinding(Microsoft.SharePoint.WorkflowActions.SendEmail.ToProperty, ((System.Workflow.ComponentModel.ActivityBind)(activitybind4)));
+            this.sendEmail_UmowaZaakceptowana.SetBinding(Microsoft.SharePoint.WorkflowActions.SendEmail.SubjectProperty, ((System.Workflow.ComponentModel.ActivityBind)(activitybind5)));
+            this.sendEmail_UmowaZaakceptowana.SetBinding(Microsoft.SharePoint.WorkflowActions.SendEmail.ToProperty, ((System.Workflow.ComponentModel.ActivityBind)(activitybind6)));
+            this.sendEmail_UmowaZaakceptowana.SetBinding(Microsoft.SharePoint.WorkflowActions.SendEmail.CCProperty, ((System.Workflow.ComponentModel.ActivityBind)(activitybind3)));
+            this.sendEmail_UmowaZaakceptowana.SetBinding(Microsoft.SharePoint.WorkflowActions.SendEmail.FromProperty, ((System.Workflow.ComponentModel.ActivityBind)(activitybind4)));
             // 
             // Komunikat_UmowaUruchomiona
             // 
@@ -455,26 +468,30 @@ namespace KontraktSMW.Workflow1
             // 
             // sendEmail_WniosekZaakceptowany
             // 
-            activitybind5.Name = "Workflow1";
-            activitybind5.Path = "Mail_BCC";
-            activitybind6.Name = "Workflow1";
-            activitybind6.Path = "Mail_Body";
-            this.sendEmail_WniosekZaakceptowany.CC = null;
+            activitybind7.Name = "Workflow1";
+            activitybind7.Path = "Mail_BCC";
+            activitybind8.Name = "Workflow1";
+            activitybind8.Path = "Mail_Body";
+            activitybind9.Name = "Workflow1";
+            activitybind9.Path = "Mail_CC";
             correlationtoken2.Name = "myWorkflowToken";
             correlationtoken2.OwnerActivityName = "Workflow1";
             this.sendEmail_WniosekZaakceptowany.CorrelationToken = correlationtoken2;
-            this.sendEmail_WniosekZaakceptowany.From = null;
+            activitybind10.Name = "Workflow1";
+            activitybind10.Path = "Mail_From";
             this.sendEmail_WniosekZaakceptowany.Headers = null;
             this.sendEmail_WniosekZaakceptowany.IncludeStatus = false;
             this.sendEmail_WniosekZaakceptowany.Name = "sendEmail_WniosekZaakceptowany";
-            activitybind7.Name = "Workflow1";
-            activitybind7.Path = "Mail_Subject";
-            activitybind8.Name = "Workflow1";
-            activitybind8.Path = "Mail_To";
-            this.sendEmail_WniosekZaakceptowany.SetBinding(Microsoft.SharePoint.WorkflowActions.SendEmail.BCCProperty, ((System.Workflow.ComponentModel.ActivityBind)(activitybind5)));
-            this.sendEmail_WniosekZaakceptowany.SetBinding(Microsoft.SharePoint.WorkflowActions.SendEmail.BodyProperty, ((System.Workflow.ComponentModel.ActivityBind)(activitybind6)));
-            this.sendEmail_WniosekZaakceptowany.SetBinding(Microsoft.SharePoint.WorkflowActions.SendEmail.SubjectProperty, ((System.Workflow.ComponentModel.ActivityBind)(activitybind7)));
-            this.sendEmail_WniosekZaakceptowany.SetBinding(Microsoft.SharePoint.WorkflowActions.SendEmail.ToProperty, ((System.Workflow.ComponentModel.ActivityBind)(activitybind8)));
+            activitybind11.Name = "Workflow1";
+            activitybind11.Path = "Mail_Subject";
+            activitybind12.Name = "Workflow1";
+            activitybind12.Path = "Mail_To";
+            this.sendEmail_WniosekZaakceptowany.SetBinding(Microsoft.SharePoint.WorkflowActions.SendEmail.BCCProperty, ((System.Workflow.ComponentModel.ActivityBind)(activitybind7)));
+            this.sendEmail_WniosekZaakceptowany.SetBinding(Microsoft.SharePoint.WorkflowActions.SendEmail.BodyProperty, ((System.Workflow.ComponentModel.ActivityBind)(activitybind8)));
+            this.sendEmail_WniosekZaakceptowany.SetBinding(Microsoft.SharePoint.WorkflowActions.SendEmail.SubjectProperty, ((System.Workflow.ComponentModel.ActivityBind)(activitybind11)));
+            this.sendEmail_WniosekZaakceptowany.SetBinding(Microsoft.SharePoint.WorkflowActions.SendEmail.ToProperty, ((System.Workflow.ComponentModel.ActivityBind)(activitybind12)));
+            this.sendEmail_WniosekZaakceptowany.SetBinding(Microsoft.SharePoint.WorkflowActions.SendEmail.CCProperty, ((System.Workflow.ComponentModel.ActivityBind)(activitybind9)));
+            this.sendEmail_WniosekZaakceptowany.SetBinding(Microsoft.SharePoint.WorkflowActions.SendEmail.FromProperty, ((System.Workflow.ComponentModel.ActivityBind)(activitybind10)));
             // 
             // Komunikat_AkceptacjaWniosku
             // 
@@ -535,27 +552,31 @@ namespace KontraktSMW.Workflow1
             // 
             // sendEmail_OfertaZaakceptowana
             // 
-            activitybind9.Name = "Workflow1";
-            activitybind9.Path = "Mail_BCC";
-            activitybind10.Name = "Workflow1";
-            activitybind10.Path = "Mail_Body";
-            this.sendEmail_OfertaZaakceptowana.CC = null;
+            activitybind13.Name = "Workflow1";
+            activitybind13.Path = "Mail_BCC";
+            activitybind14.Name = "Workflow1";
+            activitybind14.Path = "Mail_Body";
+            activitybind15.Name = "Workflow1";
+            activitybind15.Path = "Mail_CC";
             correlationtoken3.Name = "myWorkflowToken";
             correlationtoken3.OwnerActivityName = "Workflow1";
             this.sendEmail_OfertaZaakceptowana.CorrelationToken = correlationtoken3;
-            this.sendEmail_OfertaZaakceptowana.From = null;
+            activitybind16.Name = "Workflow1";
+            activitybind16.Path = "Mail_From";
             this.sendEmail_OfertaZaakceptowana.Headers = null;
             this.sendEmail_OfertaZaakceptowana.IncludeStatus = false;
             this.sendEmail_OfertaZaakceptowana.Name = "sendEmail_OfertaZaakceptowana";
-            activitybind11.Name = "Workflow1";
-            activitybind11.Path = "Mail_Subject";
-            activitybind12.Name = "Workflow1";
-            activitybind12.Path = "Mail_To";
+            activitybind17.Name = "Workflow1";
+            activitybind17.Path = "Mail_Subject";
+            activitybind18.Name = "Workflow1";
+            activitybind18.Path = "Mail_To";
             this.sendEmail_OfertaZaakceptowana.MethodInvoking += new System.EventHandler(this.sendEmail_OfertaZaakceptowana_MethodInvoking);
-            this.sendEmail_OfertaZaakceptowana.SetBinding(Microsoft.SharePoint.WorkflowActions.SendEmail.BCCProperty, ((System.Workflow.ComponentModel.ActivityBind)(activitybind9)));
-            this.sendEmail_OfertaZaakceptowana.SetBinding(Microsoft.SharePoint.WorkflowActions.SendEmail.BodyProperty, ((System.Workflow.ComponentModel.ActivityBind)(activitybind10)));
-            this.sendEmail_OfertaZaakceptowana.SetBinding(Microsoft.SharePoint.WorkflowActions.SendEmail.SubjectProperty, ((System.Workflow.ComponentModel.ActivityBind)(activitybind11)));
-            this.sendEmail_OfertaZaakceptowana.SetBinding(Microsoft.SharePoint.WorkflowActions.SendEmail.ToProperty, ((System.Workflow.ComponentModel.ActivityBind)(activitybind12)));
+            this.sendEmail_OfertaZaakceptowana.SetBinding(Microsoft.SharePoint.WorkflowActions.SendEmail.BCCProperty, ((System.Workflow.ComponentModel.ActivityBind)(activitybind13)));
+            this.sendEmail_OfertaZaakceptowana.SetBinding(Microsoft.SharePoint.WorkflowActions.SendEmail.BodyProperty, ((System.Workflow.ComponentModel.ActivityBind)(activitybind14)));
+            this.sendEmail_OfertaZaakceptowana.SetBinding(Microsoft.SharePoint.WorkflowActions.SendEmail.SubjectProperty, ((System.Workflow.ComponentModel.ActivityBind)(activitybind17)));
+            this.sendEmail_OfertaZaakceptowana.SetBinding(Microsoft.SharePoint.WorkflowActions.SendEmail.ToProperty, ((System.Workflow.ComponentModel.ActivityBind)(activitybind18)));
+            this.sendEmail_OfertaZaakceptowana.SetBinding(Microsoft.SharePoint.WorkflowActions.SendEmail.CCProperty, ((System.Workflow.ComponentModel.ActivityBind)(activitybind15)));
+            this.sendEmail_OfertaZaakceptowana.SetBinding(Microsoft.SharePoint.WorkflowActions.SendEmail.FromProperty, ((System.Workflow.ComponentModel.ActivityBind)(activitybind16)));
             // 
             // Komunikat_AkceptacjaOferty
             // 
@@ -565,7 +586,6 @@ namespace KontraktSMW.Workflow1
             // 
             // setStateActivity5
             // 
-            this.setStateActivity5.Enabled = false;
             this.setStateActivity5.Name = "setStateActivity5";
             this.setStateActivity5.TargetStateName = "AkceptacjaOferty";
             // 
@@ -960,13 +980,13 @@ namespace KontraktSMW.Workflow1
             this.logToHistoryListActivity3.Duration = System.TimeSpan.Parse("-10675199.02:48:05.4775808");
             this.logToHistoryListActivity3.Enabled = false;
             this.logToHistoryListActivity3.EventId = Microsoft.SharePoint.Workflow.SPWorkflowHistoryEventType.WorkflowComment;
-            activitybind13.Name = "Workflow1";
-            activitybind13.Path = "logRozliczenie_DodajDoRozliczen";
+            activitybind19.Name = "Workflow1";
+            activitybind19.Path = "logRozliczenie_DodajDoRozliczen";
             this.logToHistoryListActivity3.HistoryOutcome = "";
             this.logToHistoryListActivity3.Name = "logToHistoryListActivity3";
             this.logToHistoryListActivity3.OtherData = "";
             this.logToHistoryListActivity3.UserId = -1;
-            this.logToHistoryListActivity3.SetBinding(Microsoft.SharePoint.WorkflowActions.LogToHistoryListActivity.HistoryDescriptionProperty, ((System.Workflow.ComponentModel.ActivityBind)(activitybind13)));
+            this.logToHistoryListActivity3.SetBinding(Microsoft.SharePoint.WorkflowActions.LogToHistoryListActivity.HistoryDescriptionProperty, ((System.Workflow.ComponentModel.ActivityBind)(activitybind19)));
             // 
             // nRozliczenie_DodajDoRozliczen
             // 
@@ -1343,27 +1363,31 @@ namespace KontraktSMW.Workflow1
             // 
             // sendEmail_Stracony
             // 
-            activitybind14.Name = "Workflow1";
-            activitybind14.Path = "Mail_BCC";
-            activitybind15.Name = "Workflow1";
-            activitybind15.Path = "Mail_Body";
-            this.sendEmail_Stracony.CC = null;
+            activitybind20.Name = "Workflow1";
+            activitybind20.Path = "Mail_BCC";
+            activitybind21.Name = "Workflow1";
+            activitybind21.Path = "Mail_Body";
+            activitybind22.Name = "Workflow1";
+            activitybind22.Path = "Mail_CC";
             correlationtoken20.Name = "myWorkflowToken";
             correlationtoken20.OwnerActivityName = "Workflow1";
             this.sendEmail_Stracony.CorrelationToken = correlationtoken20;
-            this.sendEmail_Stracony.From = null;
+            activitybind23.Name = "Workflow1";
+            activitybind23.Path = "Mail_From";
             this.sendEmail_Stracony.Headers = null;
             this.sendEmail_Stracony.IncludeStatus = false;
             this.sendEmail_Stracony.Name = "sendEmail_Stracony";
-            activitybind16.Name = "Workflow1";
-            activitybind16.Path = "Mail_Subject";
-            activitybind17.Name = "Workflow1";
-            activitybind17.Path = "Mail_To";
+            activitybind24.Name = "Workflow1";
+            activitybind24.Path = "Mail_Subject";
+            activitybind25.Name = "Workflow1";
+            activitybind25.Path = "Mail_To";
             this.sendEmail_Stracony.MethodInvoking += new System.EventHandler(this.sendEmail_Stracony_MethodInvoking);
-            this.sendEmail_Stracony.SetBinding(Microsoft.SharePoint.WorkflowActions.SendEmail.ToProperty, ((System.Workflow.ComponentModel.ActivityBind)(activitybind17)));
-            this.sendEmail_Stracony.SetBinding(Microsoft.SharePoint.WorkflowActions.SendEmail.SubjectProperty, ((System.Workflow.ComponentModel.ActivityBind)(activitybind16)));
-            this.sendEmail_Stracony.SetBinding(Microsoft.SharePoint.WorkflowActions.SendEmail.BodyProperty, ((System.Workflow.ComponentModel.ActivityBind)(activitybind15)));
-            this.sendEmail_Stracony.SetBinding(Microsoft.SharePoint.WorkflowActions.SendEmail.BCCProperty, ((System.Workflow.ComponentModel.ActivityBind)(activitybind14)));
+            this.sendEmail_Stracony.SetBinding(Microsoft.SharePoint.WorkflowActions.SendEmail.ToProperty, ((System.Workflow.ComponentModel.ActivityBind)(activitybind25)));
+            this.sendEmail_Stracony.SetBinding(Microsoft.SharePoint.WorkflowActions.SendEmail.SubjectProperty, ((System.Workflow.ComponentModel.ActivityBind)(activitybind24)));
+            this.sendEmail_Stracony.SetBinding(Microsoft.SharePoint.WorkflowActions.SendEmail.BodyProperty, ((System.Workflow.ComponentModel.ActivityBind)(activitybind21)));
+            this.sendEmail_Stracony.SetBinding(Microsoft.SharePoint.WorkflowActions.SendEmail.BCCProperty, ((System.Workflow.ComponentModel.ActivityBind)(activitybind20)));
+            this.sendEmail_Stracony.SetBinding(Microsoft.SharePoint.WorkflowActions.SendEmail.CCProperty, ((System.Workflow.ComponentModel.ActivityBind)(activitybind22)));
+            this.sendEmail_Stracony.SetBinding(Microsoft.SharePoint.WorkflowActions.SendEmail.FromProperty, ((System.Workflow.ComponentModel.ActivityBind)(activitybind23)));
             // 
             // logToHistoryListActivity2
             // 
@@ -1552,6 +1576,11 @@ namespace KontraktSMW.Workflow1
             this.StatusLead_Rozmowa.Enabled = false;
             this.StatusLead_Rozmowa.Name = "StatusLead_Rozmowa";
             // 
+            // codeSetup
+            // 
+            this.codeSetup.Name = "codeSetup";
+            this.codeSetup.ExecuteCode += new System.EventHandler(this.codeSetup_ExecuteCode);
+            // 
             // logZainicjowany
             // 
             this.logZainicjowany.Duration = System.TimeSpan.Parse("-10675199.02:48:05.4775808");
@@ -1569,9 +1598,9 @@ namespace KontraktSMW.Workflow1
             this.onWorkflowActivated1.CorrelationToken = correlationtoken27;
             this.onWorkflowActivated1.EventName = "OnWorkflowActivated";
             this.onWorkflowActivated1.Name = "onWorkflowActivated1";
-            activitybind18.Name = "Workflow1";
-            activitybind18.Path = "workflowProperties";
-            this.onWorkflowActivated1.SetBinding(Microsoft.SharePoint.WorkflowActions.OnWorkflowActivated.WorkflowPropertiesProperty, ((System.Workflow.ComponentModel.ActivityBind)(activitybind18)));
+            activitybind26.Name = "Workflow1";
+            activitybind26.Path = "workflowProperties";
+            this.onWorkflowActivated1.SetBinding(Microsoft.SharePoint.WorkflowActions.OnWorkflowActivated.WorkflowPropertiesProperty, ((System.Workflow.ComponentModel.ActivityBind)(activitybind26)));
             // 
             // stateInitializationActivity12
             // 
@@ -1763,6 +1792,7 @@ namespace KontraktSMW.Workflow1
             // 
             this.eventDrivenActivity1.Activities.Add(this.onWorkflowActivated1);
             this.eventDrivenActivity1.Activities.Add(this.logZainicjowany);
+            this.eventDrivenActivity1.Activities.Add(this.codeSetup);
             this.eventDrivenActivity1.Activities.Add(this.StatusLead_Rozmowa);
             this.eventDrivenActivity1.Activities.Add(this.setStateActivity1);
             this.eventDrivenActivity1.Activities.Add(this.faultHandlersActivity1);
@@ -1894,6 +1924,8 @@ namespace KontraktSMW.Workflow1
         #endregion
 
         private Microsoft.SharePoint.WorkflowActions.SendEmail sendEmail_WniosekZaakceptowany;
+
+        private CodeActivity codeSetup;
 
         private Microsoft.SharePoint.WorkflowActions.SendEmail sendEmail_OfertaZaakceptowana;
 
@@ -2330,6 +2362,18 @@ namespace KontraktSMW.Workflow1
         private StateActivity Navigator;
 
         private StateActivity Start;
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
